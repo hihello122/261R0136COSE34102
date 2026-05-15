@@ -1,0 +1,48 @@
+========================================
+ ConGra QLoRA Training
+========================================
+ Mode:          baseline
+ Model:         deepseek-ai/deepseek-coder-1.3b-base
+ Dataset:       ./data/processed/dataset_baseline_ctx20
+ Output:        /opt/dlami/nvme/ckpts/baseline_ctx20
+ Batch:         2 x 2 = 4
+ LR:            2e-4
+ Epochs:        10 (patience=3)
+ Max seq len:   2048
+ LoRA:          r=16, alpha=32
+ WandB:         false
+========================================
+
+Model:          deepseek-ai/deepseek-coder-1.3b-base
+Dataset:        ./data/processed/dataset_baseline_ctx20
+Output dir:     /opt/dlami/nvme/ckpts/baseline_ctx20
+Effective batch size: 4
+Max seq length: 2048
+
+Loading dataset...
+  Train: 9082 samples
+  Val:   289 samples
+Loading tokenizer...
+Tokenizing dataset (truncation applied here)...
+  Train (num_proc=4):   0%|          | 0/9082 [00:00<?, ? examples/s]  Train (num_proc=4):  11%|█         | 1000/9082 [00:01<00:14, 549.86 examples/s]  Train (num_proc=4):  22%|██▏       | 2000/9082 [00:02<00:08, 788.44 examples/s]  Train (num_proc=4):  36%|███▌      | 3271/9082 [00:03<00:04, 1335.73 examples/s]  Train (num_proc=4):  58%|█████▊    | 5271/9082 [00:03<00:01, 1979.79 examples/s]  Train (num_proc=4):  80%|████████  | 7271/9082 [00:03<00:00, 3211.44 examples/s]  Train (num_proc=4):  97%|█████████▋| 8811/9082 [00:04<00:00, 2738.79 examples/s]  Train (num_proc=4): 100%|██████████| 9082/9082 [00:04<00:00, 1880.88 examples/s]
+  Val (num_proc=4):   0%|          | 0/289 [00:00<?, ? examples/s]  Val (num_proc=4):  25%|██▌       | 73/289 [00:00<00:01, 129.25 examples/s]  Val (num_proc=4):  50%|█████     | 145/289 [00:00<00:00, 182.04 examples/s]  Val (num_proc=4):  75%|███████▌  | 217/289 [00:01<00:00, 200.18 examples/s]  Val (num_proc=4): 100%|██████████| 289/289 [00:01<00:00, 215.28 examples/s]  Val (num_proc=4): 100%|██████████| 289/289 [00:01<00:00, 185.95 examples/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  Tokenized. Train max tokens: 2048
+Loading model...
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+Loading weights:   9%|▊         | 19/219 [00:00<00:01, 188.93it/s]Loading weights:  40%|███▉      | 87/219 [00:00<00:00, 472.07it/s]Loading weights:  72%|███████▏  | 157/219 [00:00<00:00, 571.07it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 555.08it/s]
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'pad_token_id': 32014}.
+  Attention: sdpa
+  Parameters: 1,346,471,936
+Initializing trainer...
+  Response template: '\n// Resolution\n'
+  Response token ids: [553, 2064, 3548]
+[Checkpoint] 기존 체크포인트 발견 → 자동 resume: /opt/dlami/nvme/ckpts/baseline_ctx20/checkpoint-2000
+
+Starting training...
+  Epochs: 10 (with early stopping, patience=3)
+  Batch: 2 x 2 = 4
+
+  0%|          | 0/22710 [00:00<?, ?it/s]  9%|▉         | 2001/22710 [00:01<00:13, 1503.79it/s]

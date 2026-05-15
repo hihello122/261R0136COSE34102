@@ -343,51 +343,132 @@ def process_conflict_pair(
     return samples
 
 
-def process_all(
-    data_dir: Path,
+def _project_split(project: str) -> str:
+    for s, projects in SPLIT_CONFIG.items():
+        if project in projects:
+            return s
+    print(f"  [WARN] Project '{project}' not in SPLIT_CONFIG, adding to train")
+    return "train"
+
+
+def _cache_path(cache_dir: Path, project: str) -> Path:
+    return cache_dir / f"{project}.jsonl"
+
+
+def _write_cache(cache_path: Path, split: str, samples: list[dict]) -> None:
+    """프로젝트 단위 JSONL 캐시 저장. 첫 줄은 메타데이터."""
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = cache_path.with_suffix(".jsonl.tmp")
+    with open(tmp_path, "w", encoding="utf-8") as f:
+        f.write(json.dumps({"__meta__": True, "split": split, "count": len(samples)}) + "\n")
+        for s in samples:
+            f.write(json.dumps(s, ensure_ascii=False) + "\n")
+    tmp_path.replace(cache_path)
+
+
+def _read_cache(cache_path: Path) -> tuple[str, list[dict]]:
+    """캐시 → (split, samples). 메타가 없으면 split을 SPLIT_CONFIG에서 추론."""
+    samples: list[dict] = []
+    split: str | None = None
+    with open(cache_path, "r", encoding="utf-8") as f:
+        for i, line in enumerate(f):
+            line = line.strip()
+            if not line:
+                continue
+            obj = json.loads(line)
+            if i == 0 and obj.get("__meta__"):
+                split = obj.get("split")
+                continue
+            samples.append(obj)
+    if split is None:
+        project = cache_path.stem
+        split = _project_split(project)
+    return split, samples
+
+
+def process_project(
+    project_dir: Path,
+    project: str,
     context_lines: int,
     mode: str,
     gumtree_bin: str | None,
-) -> dict[str, list[dict]]:
-    """전체 Java 프로젝트를 순회하며 샘플 추출 후 split별로 분류."""
-    split_data = defaultdict(list)
+) -> tuple[str, list[dict], int]:
+    """단일 프로젝트 처리. (split, samples, errors)."""
+    split = _project_split(project)
+    pair_dirs = [
+        d for d in sorted(project_dir.iterdir())
+        if d.is_dir() and d.name.startswith("conflict_files_")
+    ]
 
-    for project_dir in sorted(data_dir.iterdir()):
-        if not project_dir.is_dir():
+    samples: list[dict] = []
+    errors = 0
+    for pair_dir in tqdm(pair_dirs, desc=f"  {project:20s}", leave=True):
+        try:
+            ss = process_conflict_pair(
+                pair_dir, project, context_lines, mode, gumtree_bin
+            )
+            samples.extend(ss)
+        except Exception as e:
+            errors += 1
+            tqdm.write(f"    [ERROR] {pair_dir.name}: {e}")
             continue
-        project = project_dir.name
+    return split, samples, errors
 
-        split = None
-        for s, projects in SPLIT_CONFIG.items():
-            if project in projects:
-                split = s
-                break
-        if split is None:
-            print(f"  [WARN] Project '{project}' not in SPLIT_CONFIG, adding to train")
-            split = "train"
 
-        pair_dirs = [
-            d for d in sorted(project_dir.iterdir())
-            if d.is_dir() and d.name.startswith("conflict_files_")
-        ]
+def extract_phase(
+    data_dir: Path,
+    cache_dir: Path,
+    context_lines: int,
+    mode: str,
+    gumtree_bin: str | None,
+    projects_filter: list[str] | None,
+    force: bool,
+) -> None:
+    """프로젝트별로 처리하여 cache_dir/<project>.jsonl 로 저장."""
+    cache_dir.mkdir(parents=True, exist_ok=True)
 
-        count = 0
-        errors = 0
-        for pair_dir in tqdm(pair_dirs, desc=f"  {project:20s}", leave=True):
+    all_projects = [
+        p.name for p in sorted(data_dir.iterdir()) if p.is_dir()
+    ]
+    if projects_filter:
+        unknown = [p for p in projects_filter if p not in all_projects]
+        if unknown:
+            print(f"  [WARN] Unknown projects (skipped): {unknown}")
+        targets = [p for p in all_projects if p in projects_filter]
+    else:
+        targets = all_projects
+
+    for project in targets:
+        cache_path = _cache_path(cache_dir, project)
+        if cache_path.exists() and not force:
             try:
-                samples = process_conflict_pair(
-                    pair_dir, project, context_lines, mode, gumtree_bin
-                )
-                split_data[split].extend(samples)
-                count += len(samples)
-            except Exception as e:
-                errors += 1
-                tqdm.write(f"    [ERROR] {pair_dir.name}: {e}")
+                _, cached = _read_cache(cache_path)
+                tqdm.write(f"  {project}: SKIP (cached, {len(cached)} samples) → {cache_path}")
                 continue
+            except Exception as e:
+                tqdm.write(f"  {project}: cache unreadable ({e}), reprocessing")
 
+        project_dir = data_dir / project
+        split, samples, errors = process_project(
+            project_dir, project, context_lines, mode, gumtree_bin
+        )
+        _write_cache(cache_path, split, samples)
         err_msg = f" ({errors} errors)" if errors else ""
-        tqdm.write(f"  {project}: {count} samples → {split}{err_msg}")
+        tqdm.write(f"  {project}: {len(samples)} samples → {split}{err_msg} [cached]")
 
+
+def load_split_data_from_cache(cache_dir: Path) -> dict[str, list[dict]]:
+    """cache_dir 의 모든 *.jsonl 을 읽어 split별로 합친다."""
+    split_data: dict[str, list[dict]] = defaultdict(list)
+    if not cache_dir.exists():
+        return split_data
+    for cache_path in sorted(cache_dir.glob("*.jsonl")):
+        try:
+            split, samples = _read_cache(cache_path)
+            split_data[split].extend(samples)
+            print(f"  loaded {cache_path.name}: {len(samples)} samples → {split}")
+        except Exception as e:
+            print(f"  [WARN] failed to load {cache_path}: {e}")
     return split_data
 
 
@@ -427,15 +508,35 @@ def main():
     parser.add_argument("--tokenizer", type=str, default="deepseek-ai/deepseek-coder-1.3b-base")
     parser.add_argument("--skip_stats", action="store_true",
                         help="토큰 길이 통계 건너뛰기")
+    parser.add_argument("--projects", type=str, default=None,
+                        help="extract phase에서 처리할 프로젝트 목록 (콤마 구분). 미지정시 전체.")
+    parser.add_argument("--phase", type=str, default="all",
+                        choices=["extract", "finalize", "all"],
+                        help="extract: 프로젝트별 캐시만 생성. "
+                             "finalize: 캐시를 모아 Dataset 빌드/저장/통계. "
+                             "all: extract → finalize.")
+    parser.add_argument("--cache_dir", type=str, default=None,
+                        help="프로젝트별 캐시 위치 (기본: <output_dir>/.cache/<mode>_ctx<N>)")
+    parser.add_argument("--force", action="store_true",
+                        help="extract phase에서 기존 캐시를 덮어쓴다.")
     args = parser.parse_args()
 
     data_dir = Path(args.data_dir)
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # AST 모드일 때 GumTree 설치 확인
+    cache_dir = (
+        Path(args.cache_dir) if args.cache_dir
+        else output_dir / ".cache" / f"{args.mode}_ctx{args.context_lines}"
+    )
+
+    projects_filter = None
+    if args.projects:
+        projects_filter = [p.strip() for p in args.projects.split(",") if p.strip()]
+
+    # AST 모드일 때 GumTree 설치 확인 (extract phase 에서만 필요)
     gumtree_bin = None
-    if args.mode in ("ast", "ast+type"):
+    if args.mode in ("ast", "ast+type") and args.phase in ("extract", "all"):
         if shutil.which(args.gumtree_bin):
             gumtree_bin = args.gumtree_bin
             print(f"GumTree found: {gumtree_bin}")
@@ -448,19 +549,43 @@ def main():
     print(f"Data dir:      {data_dir}")
     print(f"Mode:          {args.mode}")
     print(f"Context lines: {args.context_lines}")
+    print(f"Phase:         {args.phase}")
+    print(f"Cache dir:     {cache_dir}")
+    if projects_filter:
+        print(f"Projects:      {projects_filter}")
     print()
 
-    # 1. 전처리
-    print("=" * 60)
-    print("Step 1: Extracting conflict regions")
-    print("=" * 60)
-    split_data = process_all(data_dir, args.context_lines, args.mode, gumtree_bin)
+    # ── extract phase ────────────────────────────────────────────
+    if args.phase in ("extract", "all"):
+        print("=" * 60)
+        print("Phase: extract (per-project, checkpointed)")
+        print("=" * 60)
+        extract_phase(
+            data_dir=data_dir,
+            cache_dir=cache_dir,
+            context_lines=args.context_lines,
+            mode=args.mode,
+            gumtree_bin=gumtree_bin,
+            projects_filter=projects_filter,
+            force=args.force,
+        )
 
-    # 2. Dataset 생성
+    if args.phase == "extract":
+        print(f"\nextract phase done. Caches in {cache_dir}")
+        print("Run with --phase finalize 으로 Dataset 빌드를 진행하세요.")
+        return
+
+    # ── finalize phase ───────────────────────────────────────────
     print()
     print("=" * 60)
-    print("Step 2: Building HuggingFace datasets")
+    print("Phase: finalize (build dataset from caches)")
     print("=" * 60)
+    split_data = load_split_data_from_cache(cache_dir)
+    if not any(split_data.values()):
+        print(f"[ERROR] No samples in cache dir: {cache_dir}")
+        print("  Run extract phase 먼저 실행하세요.")
+        return
+
     ds_dict = {}
     for split_name, samples in split_data.items():
         if samples:
@@ -469,11 +594,11 @@ def main():
 
     dataset = DatasetDict(ds_dict)
 
-    # 3. 토큰 길이 통계
+    # 토큰 길이 통계
     if not args.skip_stats:
         print()
         print("=" * 60)
-        print("Step 3: Token length statistics")
+        print("Token length statistics")
         print("=" * 60)
         tokenizer = AutoTokenizer.from_pretrained(args.tokenizer, trust_remote_code=True)
         stats = {}
@@ -499,10 +624,10 @@ def main():
     else:
         print("\nSkipping token stats (--skip_stats)")
 
-    # 4. 저장 (mode별로 서브디렉토리 분리)
+    # 저장
     print()
     print("=" * 60)
-    print("Step 4: Saving dataset")
+    print("Saving dataset")
     print("=" * 60)
     save_dir = output_dir / f"dataset_{args.mode}_ctx{args.context_lines}"
     dataset.save_to_disk(str(save_dir))

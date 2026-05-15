@@ -1,0 +1,121 @@
+[Log] ./logs/train_baseline_ctx20_20260506_072408.log
+========================================
+ ConGra QLoRA Training
+========================================
+ Model:         deepseek-ai/deepseek-coder-1.3b-base
+ Dataset:       ./data/processed/dataset_baseline_ctx20
+ Output:        /opt/dlami/nvme/ckpts/baseline_ctx20
+ Batch:         1 x 1 = 1
+ LR:            2e-4
+ Epochs:        10 (patience=3)
+ Max seq len:   1024
+ LoRA:          r=16, alpha=32
+ WandB:         false
+========================================
+
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Model:          deepseek-ai/deepseek-coder-1.3b-base
+Dataset:        ./data/processed/dataset_baseline_ctx20
+Output dir:     /opt/dlami/nvme/ckpts/baseline_ctx20
+Effective batch size: 1
+Max seq length: 1024
+
+Loading dataset...
+  Train: 9082 samples
+  Val:   289 samples
+Loading tokenizer...
+Loading model...
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+Loading weights:   9%|▊         | 19/219 [00:00<00:01, 187.91it/s]Loading weights:  40%|███▉      | 87/219 [00:00<00:00, 470.09it/s]Loading weights:  72%|███████▏  | 157/219 [00:00<00:00, 567.97it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 551.75it/s]
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'pad_token_id': 32014}.
+  Attention: sdpa
+  Parameters: 1,346,471,936
+Initializing trainer...
+  Response template: '\n// Resolution\n'
+  Response token ids: [553, 2064, 3548]
+[Checkpoint] 기존 체크포인트 없음 → 처음부터 학습
+
+Starting training...
+  Epochs: 10 (with early stopping, patience=3)
+  Batch: 1 x 1 = 1
+
+  0%|          | 0/90820 [00:00<?, ?it/s]  0%|          | 1/90820 [00:00<24:33:54,  1.03it/s]  0%|          | 2/90820 [00:01<16:01:40,  1.57it/s]  0%|          | 3/90820 [00:01<13:46:07,  1.83it/s]  0%|          | 4/90820 [00:02<12:13:43,  2.06it/s]  0%|          | 5/90820 [00:02<11:21:54,  2.22it/s]  0%|          | 6/90820 [00:02<10:54:17,  2.31it/s]  0%|          | 7/90820 [00:03<10:41:17,  2.36it/s]  0%|          | 8/90820 [00:03<11:54:04,  2.12it/s]  0%|          | 9/90820 [00:04<11:22:37,  2.22it/s]  0%|          | 10/90820 [00:04<10:57:37,  2.30it/s]  0%|          | 11/90820 [00:05<10:38:37,  2.37it/s]  0%|          | 12/90820 [00:05<10:27:17,  2.41it/s]  0%|          | 13/90820 [00:05<10:29:34,  2.40it/s]  0%|          | 14/90820 [00:08<24:42:20,  1.02it/s]  0%|          | 15/90820 [00:08<20:16:26,  1.24it/s]  0%|          | 16/90820 [00:09<17:10:19,  1.47it/s]  0%|          | 17/90820 [00:09<14:57:23,  1.69it/s]  0%|          | 18/90820 [00:09<13:27:38,  1.87it/s]  0%|          | 19/90820 [00:10<12:40:59,  1.99it/s]  0%|          | 20/90820 [00:10<11:53:01,  2.12it/s]                                                       0%|          | 20/90820 [00:10<11:53:01,  2.12it/s]  0%|          | 21/90820 [00:11<11:24:57,  2.21it/s]  0%|          | 22/90820 [00:11<11:03:09,  2.28it/s]  0%|          | 23/90820 [00:11<10:55:26,  2.31it/s]  0%|          | 24/90820 [00:12<10:48:59,  2.33it/s]  0%|          | 25/90820 [00:13<12:55:40,  1.95it/s]  0%|          | 26/90820 [00:13<12:07:35,  2.08it/s]  0%|          | 27/90820 [00:13<11:33:52,  2.18it/s]  0%|          | 28/90820 [00:14<11:14:27,  2.24it/s]  0%|          | 29/90820 [00:14<11:19:35,  2.23it/s]  0%|          | 30/90820 [00:15<12:33:05,  2.01it/s]  0%|          | 31/90820 [00:15<13:36:36,  1.85it/s]  0%|          | 32/90820 [00:16<12:33:09,  2.01it/s]  0%|          | 33/90820 [00:16<12:09:58,  2.07it/s]  0%|          | 34/90820 [00:17<11:37:12,  2.17it/s]  0%|          | 35/90820 [00:17<11:12:16,  2.25it/s]  0%|          | 36/90820 [00:18<10:58:30,  2.30it/s]  0%|          | 37/90820 [00:18<13:15:36,  1.90it/s]  0%|          | 38/90820 [00:19<12:24:14,  2.03it/s]  0%|          | 39/90820 [00:19<12:24:22,  2.03it/s]  0%|          | 40/90820 [00:20<11:46:34,  2.14it/s]                                                       0%|          | 40/90820 [00:20<11:46:34,  2.14it/s]  0%|          | 41/90820 [00:20<11:19:06,  2.23it/s]  0%|          | 42/90820 [00:20<11:14:07,  2.24it/s]  0%|          | 43/90820 [00:21<10:56:18,  2.31it/s]  0%|          | 44/90820 [00:21<10:48:33,  2.33it/s]  0%|          | 45/90820 [00:22<10:40:51,  2.36it/s]  0%|          | 46/90820 [00:22<10:31:07,  2.40it/s]  0%|          | 47/90820 [00:22<10:33:40,  2.39it/s]  0%|          | 48/90820 [00:23<10:36:24,  2.38it/s]  0%|          | 49/90820 [00:23<10:28:43,  2.41it/s]  0%|          | 50/90820 [00:24<10:26:05,  2.42it/s]  0%|          | 51/90820 [00:25<13:35:45,  1.85it/s]  0%|          | 52/90820 [00:25<12:51:11,  1.96it/s]  0%|          | 53/90820 [00:25<12:04:05,  2.09it/s]  0%|          | 54/90820 [00:26<11:31:52,  2.19it/s]  0%|          | 55/90820 [00:26<11:10:43,  2.26it/s]  0%|          | 56/90820 [00:27<10:53:40,  2.31it/s]  0%|          | 57/90820 [00:27<10:59:30,  2.29it/s]  0%|          | 58/90820 [00:28<14:20:48,  1.76it/s]  0%|          | 59/90820 [00:30<21:59:54,  1.15it/s]  0%|          | 60/90820 [00:30<18:30:39,  1.36it/s]                                                       0%|          | 60/90820 [00:30<18:30:39,  1.36it/s]  0%|          | 61/90820 [00:30<15:59:11,  1.58it/s]  0%|          | 62/90820 [00:31<15:59:22,  1.58it/s]  0%|          | 63/90820 [00:31<14:30:42,  1.74it/s]  0%|          | 64/90820 [00:32<13:14:59,  1.90it/s]  0%|          | 65/90820 [00:32<12:18:08,  2.05it/s]  0%|          | 66/90820 [00:33<11:40:57,  2.16it/s]  0%|          | 67/90820 [00:33<11:18:16,  2.23it/s]  0%|          | 68/90820 [00:33<11:11:26,  2.25it/s]  0%|          | 69/90820 [00:34<10:54:13,  2.31it/s]  0%|          | 70/90820 [00:34<10:44:21,  2.35it/s]  0%|          | 71/90820 [00:35<10:35:58,  2.38it/s]  0%|          | 72/90820 [00:35<10:28:32,  2.41it/s]  0%|          | 73/90820 [00:36<10:42:59,  2.35it/s]  0%|          | 74/90820 [00:36<11:02:16,  2.28it/s]  0%|          | 75/90820 [00:36<10:51:26,  2.32it/s]  0%|          | 76/90820 [00:53<129:07:20,  5.12s/it]  0%|          | 77/90820 [00:53<93:25:17,  3.71s/it]   0%|          | 78/90820 [00:54<70:11:37,  2.78s/it]  0%|          | 79/90820 [00:54<52:13:11,  2.07s/it]  0%|          | 80/90820 [00:54<39:37:47,  1.57s/it]                                                       0%|          | 80/90820 [00:54<39:37:47,  1.57s/it]  0%|          | 81/90820 [00:56<41:36:01,  1.65s/it]  0%|          | 82/90820 [00:57<32:24:08,  1.29s/it]  0%|          | 83/90820 [00:57<25:44:02,  1.02s/it]  0%|          | 84/90820 [00:57<21:03:18,  1.20it/s]  0%|          | 85/90820 [00:58<17:47:32,  1.42it/s]  0%|          | 86/90820 [00:58<15:31:50,  1.62it/s]  0%|          | 87/90820 [00:59<14:04:01,  1.79it/s]  0%|          | 88/90820 [00:59<13:07:41,  1.92it/s]  0%|          | 89/90820 [01:00<12:25:31,  2.03it/s]  0%|          | 90/90820 [01:00<11:48:41,  2.13it/s]  0%|          | 91/90820 [01:00<11:22:14,  2.22it/s]  0%|          | 92/90820 [01:01<11:06:50,  2.27it/s]  0%|          | 93/90820 [01:02<18:17:26,  1.38it/s]  0%|          | 94/90820 [01:03<15:58:15,  1.58it/s]  0%|          | 95/90820 [01:03<14:35:47,  1.73it/s]  0%|          | 96/90820 [01:03<13:18:01,  1.89it/s]  0%|          | 97/90820 [01:04<12:25:21,  2.03it/s]  0%|          | 98/90820 [01:04<11:45:58,  2.14it/s]  0%|          | 99/90820 [01:05<11:22:00,  2.22it/s]  0%|          | 100/90820 [01:05<11:13:05,  2.25it/s]                                                        0%|          | 100/90820 [01:05<11:13:05,  2.25it/s]  0%|          | 101/90820 [01:06<11:02:37,  2.28it/s]  0%|          | 102/90820 [01:06<10:50:55,  2.32it/s]  0%|          | 103/90820 [01:07<12:19:12,  2.05it/s]  0%|          | 104/90820 [01:07<11:47:51,  2.14it/s]  0%|          | 105/90820 [01:07<11:36:24,  2.17it/s]  0%|          | 106/90820 [01:08<11:09:25,  2.26it/s]  0%|          | 107/90820 [01:08<10:49:42,  2.33it/s]  0%|          | 108/90820 [01:09<13:28:19,  1.87it/s]  0%|          | 109/90820 [01:09<12:44:27,  1.98it/s]  0%|          | 110/90820 [01:10<11:58:35,  2.10it/s]  0%|          | 111/90820 [01:10<11:26:24,  2.20it/s]  0%|          | 112/90820 [01:11<11:03:24,  2.28it/s]  0%|          | 113/90820 [01:11<10:46:06,  2.34it/s]  0%|          | 114/90820 [01:11<10:45:51,  2.34it/s]  0%|          | 115/90820 [01:12<10:39:17,  2.36it/s]  0%|          | 116/90820 [01:12<10:30:45,  2.40it/s]  0%|          | 117/90820 [01:13<10:23:10,  2.43it/s]  0%|          | 118/90820 [01:13<10:21:29,  2.43it/s]  0%|          | 119/90820 [01:14<11:33:39,  2.18it/s]  0%|          | 120/90820 [01:14<11:11:52,  2.25it/s]                                                        0%|          | 120/90820 [01:14<11:11:52,  2.25it/s]  0%|          | 121/90820 [01:15<10:55:28,  2.31it/s]  0%|          | 122/90820 [01:15<10:43:53,  2.35it/s]  0%|          | 123/90820 [01:15<10:36:01,  2.38it/s]  0%|          | 124/90820 [01:16<10:41:19,  2.36it/s]  0%|          | 125/90820 [01:16<10:37:47,  2.37it/s]  0%|          | 126/90820 [01:17<10:31:43,  2.39it/s]  0%|          | 127/90820 [01:17<12:03:08,  2.09it/s]  0%|          | 128/90820 [01:18<11:30:14,  2.19it/s]  0%|          | 129/90820 [01:19<16:00:13,  1.57it/s]  0%|          | 130/90820 [01:19<14:15:15,  1.77it/s]  0%|          | 131/90820 [01:19<13:01:01,  1.94it/s]  0%|          | 132/90820 [01:20<12:10:23,  2.07it/s]  0%|          | 133/90820 [01:20<11:48:27,  2.13it/s]  0%|          | 134/90820 [01:21<11:16:07,  2.24it/s]  0%|          | 135/90820 [01:21<10:56:46,  2.30it/s]  0%|          | 136/90820 [01:22<10:43:00,  2.35it/s]  0%|          | 137/90820 [01:22<10:34:08,  2.38it/s]  0%|          | 138/90820 [01:22<10:39:08,  2.36it/s]  0%|          | 139/90820 [01:23<10:32:46,  2.39it/s]  0%|          | 140/90820 [01:23<10:28:18,  2.41it/s]                                                        0%|          | 140/90820 [01:23<10:28:18,  2.41it/s]  0%|          | 141/90820 [01:24<10:25:43,  2.42it/s]  0%|          | 142/90820 [01:24<13:09:08,  1.92it/s]  0%|          | 143/90820 [01:25<12:17:33,  2.05it/s]  0%|          | 144/90820 [01:25<11:39:26,  2.16it/s]  0%|          | 145/90820 [01:26<12:25:05,  2.03it/s]  0%|          | 146/90820 [01:26<11:49:07,  2.13it/s]  0%|          | 147/90820 [01:27<11:30:11,  2.19it/s]  0%|          | 148/90820 [01:27<11:05:32,  2.27it/s]  0%|          | 149/90820 [01:27<10:48:47,  2.33it/s]  0%|          | 150/90820 [01:28<10:41:18,  2.36it/s]  0%|          | 151/90820 [01:28<12:07:26,  2.08it/s]  0%|          | 152/90820 [01:29<11:48:54,  2.13it/s]  0%|          | 153/90820 [01:29<11:27:35,  2.20it/s]  0%|          | 154/90820 [01:30<11:13:14,  2.24it/s]  0%|          | 155/90820 [01:30<11:11:49,  2.25it/s]  0%|          | 156/90820 [01:31<10:51:45,  2.32it/s]  0%|          | 157/90820 [01:31<10:53:08,  2.31it/s]  0%|          | 158/90820 [01:31<10:40:59,  2.36it/s]  0%|          | 159/90820 [01:32<10:32:19,  2.39it/s]  0%|          | 160/90820 [01:32<10:32:00,  2.39it/s]                                                        0%|          | 160/90820 [01:32<10:32:00,  2.39it/s]  0%|          | 161/90820 [01:33<10:26:24,  2.41it/s]  0%|          | 162/90820 [01:33<10:56:41,  2.30it/s]  0%|          | 163/90820 [01:33<10:47:50,  2.33it/s]  0%|          | 164/90820 [01:34<10:51:21,  2.32it/s]  0%|          | 165/90820 [01:34<10:46:20,  2.34it/s]  0%|          | 166/90820 [01:35<10:43:17,  2.35it/s]  0%|          | 167/90820 [01:35<10:50:08,  2.32it/s]  0%|          | 168/90820 [01:36<10:40:30,  2.36it/s]  0%|          | 169/90820 [01:36<10:31:25,  2.39it/s]  0%|          | 170/90820 [01:36<10:26:24,  2.41it/s]  0%|          | 171/90820 [01:37<10:23:09,  2.42it/s]  0%|          | 172/90820 [01:37<10:35:46,  2.38it/s]  0%|          | 173/90820 [01:38<10:28:18,  2.40it/s]  0%|          | 174/90820 [01:38<11:08:02,  2.26it/s]  0%|          | 175/90820 [01:39<12:32:34,  2.01it/s]  0%|          | 176/90820 [01:39<11:48:20,  2.13it/s]  0%|          | 177/90820 [01:40<11:38:05,  2.16it/s]  0%|          | 178/90820 [01:40<11:16:27,  2.23it/s]  0%|          | 179/90820 [01:40<10:58:09,  2.30it/s]  0%|          | 180/90820 [01:41<10:43:26,  2.35it/s]                                                        0%|          | 180/90820 [01:41<10:43:26,  2.35it/s]  0%|          | 181/90820 [01:41<10:38:05,  2.37it/s]  0%|          | 182/90820 [01:42<10:49:22,  2.33it/s]  0%|          | 183/90820 [01:42<10:47:36,  2.33it/s]  0%|          | 184/90820 [01:43<16:00:53,  1.57it/s]  0%|          | 185/90820 [01:44<14:31:35,  1.73it/s]  0%|          | 186/90820 [01:44<13:46:42,  1.83it/s]  0%|          | 187/90820 [01:45<12:46:47,  1.97it/s]  0%|          | 188/90820 [01:45<11:58:25,  2.10it/s]  0%|          | 189/90820 [01:45<11:24:44,  2.21it/s]  0%|          | 190/90820 [01:46<11:20:05,  2.22it/s]  0%|          | 191/90820 [01:46<11:04:02,  2.27it/s]  0%|          | 192/90820 [01:47<10:48:27,  2.33it/s]  0%|          | 193/90820 [01:47<10:38:51,  2.36it/s]  0%|          | 194/90820 [01:48<11:18:52,  2.22it/s]  0%|          | 195/90820 [01:48<11:11:08,  2.25it/s]  0%|          | 196/90820 [01:48<10:54:20,  2.31it/s]  0%|          | 197/90820 [01:49<10:45:16,  2.34it/s]  0%|          | 198/90820 [01:49<10:35:57,  2.37it/s]  0%|          | 199/90820 [01:50<12:11:06,  2.07it/s]  0%|          | 200/90820 [01:51<19:13:23,  1.31it/s]                                                        0%|          | 200/90820 [01:51<19:13:23,  1.31it/s]{'loss': '0.5161', 'grad_norm': '1.008', 'learning_rate': '1.394e-06', 'entropy': '0.5404', 'num_tokens': '1.504e+04', 'mean_token_accuracy': '0.901', 'epoch': '0.002202'}
+{'loss': '1.024', 'grad_norm': '7.156', 'learning_rate': '2.862e-06', 'entropy': '0.9242', 'num_tokens': '2.83e+04', 'mean_token_accuracy': '0.7805', 'epoch': '0.004404'}
+{'loss': '0.6894', 'grad_norm': '1.18', 'learning_rate': '4.33e-06', 'entropy': '0.6174', 'num_tokens': '4.296e+04', 'mean_token_accuracy': '0.8805', 'epoch': '0.006606'}
+{'loss': '1.093', 'grad_norm': '2.094', 'learning_rate': '5.798e-06', 'entropy': '0.9012', 'num_tokens': '7.465e+04', 'mean_token_accuracy': '0.7528', 'epoch': '0.008809'}
+{'loss': '0.716', 'grad_norm': '1.203', 'learning_rate': '7.266e-06', 'entropy': '0.6908', 'num_tokens': '8.981e+04', 'mean_token_accuracy': '0.8062', 'epoch': '0.01101'}
+{'loss': '0.4872', 'grad_norm': '2.094', 'learning_rate': '8.734e-06', 'entropy': '0.6136', 'num_tokens': '1.031e+05', 'mean_token_accuracy': '0.8301', 'epoch': '0.01321'}
+{'loss': '1.036', 'grad_norm': '0.9609', 'learning_rate': '1.02e-05', 'entropy': '1.054', 'num_tokens': '1.148e+05', 'mean_token_accuracy': '0.7714', 'epoch': '0.01542'}
+{'loss': '0.7632', 'grad_norm': '0.9766', 'learning_rate': '1.167e-05', 'entropy': '0.7421', 'num_tokens': '1.277e+05', 'mean_token_accuracy': '0.7952', 'epoch': '0.01762'}
+{'loss': '0.4377', 'grad_norm': '1.891', 'learning_rate': '1.314e-05', 'entropy': '0.6727', 'num_tokens': '1.383e+05', 'mean_token_accuracy': '0.8721', 'epoch': '0.01982'}
+{'loss': '0.5431', 'grad_norm': '10.31', 'learning_rate': '1.461e-05', 'entropy': '0.8123', 'num_tokens': '1.536e+05', 'mean_token_accuracy': '0.8569', 'epoch': '0.02202'}
+
+  0%|          | 0/37 [00:00<?, ?it/s][A
+  5%|▌         | 2/37 [00:04<01:12,  2.06s/it][A
+  8%|▊         | 3/37 [00:05<00:55,  1.63s/it][A
+ 11%|█         | 4/37 [00:06<00:47,  1.44s/it][A
+ 14%|█▎        | 5/37 [00:09<01:10,  2.21s/it][A
+ 16%|█▌        | 6/37 [00:11<01:04,  2.07s/it][A
+ 19%|█▉        | 7/37 [00:13<00:57,  1.93s/it][A
+ 22%|██▏       | 8/37 [00:16<01:05,  2.26s/it][A
+ 24%|██▍       | 9/37 [00:18<00:59,  2.13s/it][ATraceback (most recent call last):
+  File "/home/ubuntu/final_project/train.py", line 288, in <module>
+    main()
+  File "/home/ubuntu/final_project/train.py", line 270, in main
+    trainer.train(resume_from_checkpoint=resume_ckpt)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 1427, in train
+    return inner_training_loop(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 1509, in _inner_training_loop
+    self._run_epoch(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 1778, in _run_epoch
+    self._maybe_log_save_evaluate(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 2084, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 2995, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 2582, in evaluate
+    output = self.evaluation_loop(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 2707, in evaluation_loop
+    losses, logits, labels = self.prediction_step(model, inputs, prediction_loss_only, ignore_keys=ignore_keys)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1390, in prediction_step
+    return super().prediction_step(model, inputs, prediction_loss_only, ignore_keys=ignore_keys)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 2961, in prediction_step
+    loss, outputs = self.compute_loss(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1283, in compute_loss
+    (loss, outputs) = super().compute_loss(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 1981, in compute_loss
+    outputs = model(**inputs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/accelerate/utils/operations.py", line 823, in forward
+    return model_forward(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/accelerate/utils/operations.py", line 811, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/peft/peft_model.py", line 1993, in forward
+    return self.base_model(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/peft/tuners/tuners_utils.py", line 330, in forward
+    return self.model.forward(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/utils/generic.py", line 900, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 491, in forward
+    loss = self.loss_function(logits=logits, labels=labels, vocab_size=self.config.vocab_size, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/loss/loss_utils.py", line 67, in ForCausalLMLoss
+    loss = fixed_cross_entropy(logits, shift_labels, num_items_in_batch, ignore_index, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/loss/loss_utils.py", line 37, in fixed_cross_entropy
+    loss = nn.functional.cross_entropy(source, target, ignore_index=ignore_index, reduction=reduction)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/torch/nn/functional.py", line 3504, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 11.97 GiB. GPU 0 has a total capacity of 22.03 GiB of which 1.84 GiB is free. Including non-PyTorch memory, this process has 20.18 GiB memory in use. Of the allocated memory 19.87 GiB is allocated by PyTorch, and 76.63 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+  0%|          | 200/90820 [02:44<20:39:37,  1.22it/s]
+
+                                              [A

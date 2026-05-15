@@ -1,0 +1,92 @@
+[Log] ./logs/train_baseline_ctx20_20260506_072202.log
+========================================
+ ConGra QLoRA Training
+========================================
+ Model:         deepseek-ai/deepseek-coder-1.3b-base
+ Dataset:       ./data/processed/dataset_baseline_ctx20
+ Output:        /opt/dlami/nvme/ckpts/baseline_ctx20
+ Batch:         2 x 4 = 8
+ LR:            2e-4
+ Epochs:        10 (patience=3)
+ Max seq len:   1024
+ LoRA:          r=16, alpha=32
+ WandB:         false
+========================================
+
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Model:          deepseek-ai/deepseek-coder-1.3b-base
+Dataset:        ./data/processed/dataset_baseline_ctx20
+Output dir:     /opt/dlami/nvme/ckpts/baseline_ctx20
+Effective batch size: 8
+Max seq length: 1024
+
+Loading dataset...
+  Train: 9082 samples
+  Val:   289 samples
+Loading tokenizer...
+Loading model...
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+Loading weights:   9%|▉         | 20/219 [00:00<00:01, 198.03it/s]Loading weights:  41%|████      | 89/219 [00:00<00:00, 483.78it/s]Loading weights:  72%|███████▏  | 158/219 [00:00<00:00, 572.22it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 558.20it/s]
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'pad_token_id': 32014}.
+  Attention: sdpa
+  Parameters: 1,346,471,936
+Initializing trainer...
+  Response template: '\n// Resolution\n'
+  Response token ids: [553, 2064, 3548]
+[Checkpoint] 기존 체크포인트 없음 → 처음부터 학습
+
+Starting training...
+  Epochs: 10 (with early stopping, patience=3)
+  Batch: 2 x 4 = 8
+
+  0%|          | 0/11360 [00:00<?, ?it/s]  0%|          | 1/11360 [00:03<11:54:36,  3.77s/it]  0%|          | 2/11360 [00:11<19:10:46,  6.08s/it]  0%|          | 3/11360 [00:13<13:56:59,  4.42s/it]  0%|          | 4/11360 [00:18<14:09:29,  4.49s/it]  0%|          | 5/11360 [00:22<13:40:24,  4.34s/it]  0%|          | 6/11360 [00:25<11:38:26,  3.69s/it]  0%|          | 7/11360 [00:28<11:29:12,  3.64s/it]  0%|          | 8/11360 [00:36<16:03:37,  5.09s/it]  0%|          | 9/11360 [00:39<13:25:46,  4.26s/it]Traceback (most recent call last):
+  File "/home/ubuntu/final_project/train.py", line 288, in <module>
+    main()
+  File "/home/ubuntu/final_project/train.py", line 270, in main
+    trainer.train(resume_from_checkpoint=resume_ckpt)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 1427, in train
+    return inner_training_loop(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 1509, in _inner_training_loop
+    self._run_epoch(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 1737, in _run_epoch
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1395, in training_step
+    return super().training_step(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 1909, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1283, in compute_loss
+    (loss, outputs) = super().compute_loss(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/trainer.py", line 1981, in compute_loss
+    outputs = model(**inputs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/accelerate/utils/operations.py", line 823, in forward
+    return model_forward(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/accelerate/utils/operations.py", line 811, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/peft/peft_model.py", line 1993, in forward
+    return self.base_model(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/peft/tuners/tuners_utils.py", line 330, in forward
+    return self.model.forward(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/utils/generic.py", line 900, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 491, in forward
+    loss = self.loss_function(logits=logits, labels=labels, vocab_size=self.config.vocab_size, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/loss/loss_utils.py", line 67, in ForCausalLMLoss
+    loss = fixed_cross_entropy(logits, shift_labels, num_items_in_batch, ignore_index, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/loss/loss_utils.py", line 37, in fixed_cross_entropy
+    loss = nn.functional.cross_entropy(source, target, ignore_index=ignore_index, reduction=reduction)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/torch/nn/functional.py", line 3504, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 5.02 GiB. GPU 0 has a total capacity of 22.03 GiB of which 3.73 GiB is free. Including non-PyTorch memory, this process has 18.29 GiB memory in use. Of the allocated memory 17.94 GiB is allocated by PyTorch, and 123.83 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+  0%|          | 9/11360 [00:55<19:33:17,  6.20s/it]

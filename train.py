@@ -10,13 +10,13 @@ Usage:
         --model_name deepseek-ai/deepseek-coder-1.3b-base \
         --output_dir ./output \
         --num_epochs 10 \
-        --batch_size 8 \
-        --max_seq_length 2048
+        --batch_size 4 \
+        --max_seq_length 1024
 
     # 6.7B 스케일업 시
     python train.py \
         --model_name deepseek-ai/deepseek-coder-6.7b-base \
-        --batch_size 2 \
+        --batch_size 1 \
         --gradient_accumulation_steps 8
 """
 
@@ -26,14 +26,53 @@ import os
 import torch
 from datasets import load_from_disk
 from peft import LoraConfig, prepare_model_for_kbit_training
+from dataclasses import dataclass
+from typing import Any
+
 from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer,
     BitsAndBytesConfig,
     EarlyStoppingCallback,
-    TrainingArguments,
+    PreTrainedTokenizerBase,
 )
-from trl import SFTTrainer, DataCollatorForCompletionOnlyLM
+from transformers.trainer_utils import get_last_checkpoint
+
+
+@dataclass
+class DataCollatorForCompletionOnlyLM:
+    response_template: list[int]
+    tokenizer: PreTrainedTokenizerBase
+    max_length: int = 1024
+
+    def __call__(self, features: list[dict[str, Any]]) -> dict[str, torch.Tensor]:
+        batch_ids = [torch.tensor(f["input_ids"][:self.max_length], dtype=torch.long) for f in features]
+        max_len = max(len(ids) for ids in batch_ids)
+        pad_id = self.tokenizer.pad_token_id
+
+        all_input_ids, all_attn, all_labels = [], [], []
+        for ids in batch_ids:
+            # find first occurrence of the response template
+            start_idx = None
+            for j in range(len(ids) - len(self.response_template) + 1):
+                if ids[j : j + len(self.response_template)].tolist() == self.response_template:
+                    start_idx = j + len(self.response_template)
+                    break
+
+            lbl = ids.clone()
+            lbl[: start_idx if start_idx is not None else len(lbl)] = -100
+
+            pad = max_len - len(ids)
+            all_input_ids.append(torch.cat([ids, ids.new_full((pad,), pad_id)]))
+            all_attn.append(torch.cat([torch.ones(len(ids), dtype=torch.long), torch.zeros(pad, dtype=torch.long)]))
+            all_labels.append(torch.cat([lbl, lbl.new_full((pad,), -100)]))
+
+        return {
+            "input_ids": torch.stack(all_input_ids),
+            "attention_mask": torch.stack(all_attn),
+            "labels": torch.stack(all_labels),
+        }
+from trl import SFTConfig, SFTTrainer
 
 
 def parse_args():
@@ -44,7 +83,7 @@ def parse_args():
 
     # Model
     parser.add_argument("--model_name", type=str, default="deepseek-ai/deepseek-coder-1.3b-base")
-    parser.add_argument("--output_dir", type=str, default="./output")
+    parser.add_argument("--output_dir", type=str, default="/opt/dlami/nvme/ckpts")
 
     # LoRA
     parser.add_argument("--lora_r", type=int, default=16)
@@ -53,13 +92,12 @@ def parse_args():
 
     # Training
     parser.add_argument("--num_epochs", type=int, default=10)
-    parser.add_argument("--batch_size", type=int, default=8)
+    parser.add_argument("--batch_size", type=int, default=4)
     parser.add_argument("--gradient_accumulation_steps", type=int, default=2)
     parser.add_argument("--learning_rate", type=float, default=2e-4)
-    parser.add_argument("--max_seq_length", type=int, default=2048)
+    parser.add_argument("--max_seq_length", type=int, default=1024)
     parser.add_argument("--warmup_ratio", type=float, default=0.03)
     parser.add_argument("--eval_steps", type=int, default=200)
-    parser.add_argument("--save_steps", type=int, default=200)
     parser.add_argument("--logging_steps", type=int, default=20)
     parser.add_argument("--early_stopping_patience", type=int, default=3)
 
@@ -75,6 +113,7 @@ def parse_args():
 
 
 def main():
+    os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
     args = parse_args()
 
     # wandb 설정
@@ -84,8 +123,9 @@ def main():
     else:
         report_to = "none"
 
-    print(f"Model: {args.model_name}")
-    print(f"Dataset: {args.dataset_dir}")
+    print(f"Model:          {args.model_name}")
+    print(f"Dataset:        {args.dataset_dir}")
+    print(f"Output dir:     {args.output_dir}")
     print(f"Effective batch size: {args.batch_size * args.gradient_accumulation_steps}")
     print(f"Max seq length: {args.max_seq_length}")
     print()
@@ -93,18 +133,33 @@ def main():
     # ── 1. Dataset 로드 ───────────────────────────────────────────
     print("Loading dataset...")
     dataset = load_from_disk(args.dataset_dir)
-    train_ds = dataset["train"]
-    val_ds = dataset["val"]
+    train_ds = dataset["train"].select_columns(["text"])
+    val_ds = dataset["val"].select_columns(["text"])
     print(f"  Train: {len(train_ds)} samples")
     print(f"  Val:   {len(val_ds)} samples")
 
-    # ── 2. Tokenizer ─────────────────────────────────────────────
+    # ── 2. Tokenizer + 데이터셋 사전 토크나이징 ──────────────────
     print("Loading tokenizer...")
     tokenizer = AutoTokenizer.from_pretrained(
         args.model_name, trust_remote_code=True
     )
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
+
+    print("Tokenizing dataset (truncation applied here)...")
+    def tokenize_fn(examples):
+        return tokenizer(
+            examples["text"],
+            truncation=True,
+            max_length=args.max_seq_length,
+            padding=False,
+            add_special_tokens=True,
+        )
+    train_ds = train_ds.map(tokenize_fn, batched=True, remove_columns=["text"],
+                            num_proc=4, desc="  Train")
+    val_ds = val_ds.map(tokenize_fn, batched=True, remove_columns=["text"],
+                        num_proc=4, desc="  Val")
+    print(f"  Tokenized. Train max tokens: {max(len(x) for x in train_ds['input_ids'])}")
 
     # ── 3. Quantization config (4-bit) ───────────────────────────
     bnb_config = BitsAndBytesConfig(
@@ -116,12 +171,19 @@ def main():
 
     # ── 4. Model 로드 ────────────────────────────────────────────
     print("Loading model...")
-    attn_impl = "eager" if args.no_flash_attn else "flash_attention_2"
+    if args.no_flash_attn:
+        attn_impl = "eager"
+    else:
+        try:
+            import flash_attn  # noqa: F401
+            attn_impl = "flash_attention_2"
+        except ImportError:
+            attn_impl = "sdpa"
     model = AutoModelForCausalLM.from_pretrained(
         args.model_name,
         quantization_config=bnb_config,
         attn_implementation=attn_impl,
-        torch_dtype=torch.bfloat16,
+        dtype=torch.bfloat16,
         trust_remote_code=True,
     )
     model = prepare_model_for_kbit_training(model)
@@ -142,7 +204,7 @@ def main():
     )
 
     # ── 6. Training arguments ────────────────────────────────────
-    training_args = TrainingArguments(
+    training_args = SFTConfig(
         output_dir=args.output_dir,
         per_device_train_batch_size=args.batch_size,
         gradient_accumulation_steps=args.gradient_accumulation_steps,
@@ -152,20 +214,24 @@ def main():
         warmup_ratio=args.warmup_ratio,
         bf16=True,
         gradient_checkpointing=True,
+        gradient_checkpointing_kwargs={"use_reentrant": False},
         optim="paged_adamw_8bit",
         logging_steps=args.logging_steps,
         eval_strategy="steps",
         eval_steps=args.eval_steps,
         save_strategy="steps",
-        save_steps=args.save_steps,
-        save_total_limit=5,
+        save_steps=args.eval_steps,
+        save_total_limit=1,
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss",
         greater_is_better=False,
         report_to=report_to,
         seed=args.seed,
-        dataloader_num_workers=4,
+        dataloader_num_workers=0,
         remove_unused_columns=False,
+        max_length=args.max_seq_length,
+        packing=False,
+        dataset_text_field=None,
     )
 
     # ── 7. Completion-only loss masking ────────────────────────────
@@ -176,6 +242,7 @@ def main():
     collator = DataCollatorForCompletionOnlyLM(
         response_template=response_token_ids,
         tokenizer=tokenizer,
+        max_length=args.max_seq_length,
     )
 
     # ── 8. SFTTrainer ────────────────────────────────────────────
@@ -188,11 +255,8 @@ def main():
         train_dataset=train_ds,
         eval_dataset=val_ds,
         peft_config=lora_config,
-        max_seq_length=args.max_seq_length,
-        tokenizer=tokenizer,
-        packing=False,
+        processing_class=tokenizer,
         data_collator=collator,
-        dataset_text_field="text",
         callbacks=[
             EarlyStoppingCallback(
                 early_stopping_patience=args.early_stopping_patience
@@ -200,16 +264,30 @@ def main():
         ],
     )
 
-    # ── 9. 학습 ──────────────────────────────────────────────────
+    # ── 9. 체크포인트 감지 및 학습 ───────────────────────────────
+    # --resume_from_checkpoint 미지정 시 output_dir 내 최신 체크포인트 자동 탐색
+    resume_ckpt = args.resume_from_checkpoint
+    if resume_ckpt is None:
+        last_ckpt = get_last_checkpoint(args.output_dir)
+        if last_ckpt is not None:
+            resume_ckpt = last_ckpt
+            print(f"[Checkpoint] 기존 체크포인트 발견 → 자동 resume: {resume_ckpt}")
+        else:
+            print("[Checkpoint] 기존 체크포인트 없음 → 처음부터 학습")
+    else:
+        print(f"[Checkpoint] 지정된 체크포인트에서 resume: {resume_ckpt}")
+    print()
+
     print("Starting training...")
     print(f"  Epochs: {args.num_epochs} (with early stopping, patience={args.early_stopping_patience})")
     print(f"  Batch: {args.batch_size} x {args.gradient_accumulation_steps} = {args.batch_size * args.gradient_accumulation_steps}")
     print()
 
-    trainer.train(resume_from_checkpoint=args.resume_from_checkpoint)
+    trainer.train(resume_from_checkpoint=resume_ckpt)
 
     # ── 10. 저장 ──────────────────────────────────────────────────
     final_dir = os.path.join(args.output_dir, "final")
+    os.makedirs(final_dir, exist_ok=True)
     print(f"Saving final model to {final_dir}...")
     trainer.save_model(final_dir)
     tokenizer.save_pretrained(final_dir)

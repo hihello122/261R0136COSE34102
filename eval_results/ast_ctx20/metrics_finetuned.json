@@ -1,0 +1,33 @@
+{
+  "model": "./ckpts/ast_ctx20/final",
+  "split": "test",
+  "overall": {
+    "total_samples": 81,
+    "exact_match_rate": 0.0,
+    "avg_bleu": 0.11282197654220893,
+    "avg_codebleu": 0.26167518970727954,
+    "avg_token_f1": 0.19502183134543966,
+    "avg_chrf": 0.14994887000957483,
+    "avg_edit_distance": 0.888872781666325
+  },
+  "per_project": {
+    "eclipse": {
+      "count": 2,
+      "exact_match_rate": 0.0,
+      "avg_bleu": 0.084656173157519,
+      "avg_codebleu": 0.1799932523616734,
+      "avg_token_f1": 0.1420823195458232,
+      "avg_chrf": 0.1178805052544499,
+      "avg_edit_distance": 0.9489814596898617
+    },
+    "netty": {
+      "count": 79,
+      "exact_match_rate": 0.0,
+      "avg_bleu": 0.11353503485574538,
+      "avg_codebleu": 0.2637430868552696,
+      "avg_token_f1": 0.19636207215049326,
+      "avg_chrf": 0.1507607273451476,
+      "avg_edit_distance": 0.8873510429821846
+    }
+  }
+}

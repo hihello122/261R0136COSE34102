@@ -1,0 +1,39 @@
+========================================
+ Zero-shot Evaluation
+========================================
+ Mode:        baseline
+ Base model:  deepseek-ai/deepseek-coder-1.3b-base
+ Dataset:     ./data/processed/dataset_baseline_ctx20
+ Split:       test
+ Output:      ./eval_results/baseline_ctx20
+========================================
+
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading dataset...
+  test: 81 samples
+Loading base model: deepseek-ai/deepseek-coder-1.3b-base
+Traceback (most recent call last):
+  File "/home/ubuntu/final_project/evaluate.py", line 356, in <module>
+    main()
+  File "/home/ubuntu/final_project/evaluate.py", line 251, in main
+    model, tokenizer = load_model_and_tokenizer(args)
+  File "/home/ubuntu/final_project/evaluate.py", line 192, in load_model_and_tokenizer
+    model = AutoModelForCausalLM.from_pretrained(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 394, in from_pretrained
+    return model_class.from_pretrained(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4201, in from_pretrained
+    model = cls(config, *model_args, **model_kwargs)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 435, in __init__
+    super().__init__(config)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1322, in __init__
+    self.config._attn_implementation_internal = self._check_and_adjust_attn_implementation(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1933, in _check_and_adjust_attn_implementation
+    applicable_attn_implementation = self.get_correct_attn_implementation(
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1980, in get_correct_attn_implementation
+    self._flash_attn_can_dispatch(flash_attn_version=fa_version, is_init_check=is_init_check)
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1714, in _flash_attn_can_dispatch
+    self._flash_attn_import_error(**FLASH_ATTENTION_COMPATIBILITY_MATRIX[flash_attn_version])
+  File "/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1669, in _flash_attn_import_error
+    raise ImportError(
+ImportError: FlashAttention2 has been toggled on, but it cannot be used due to the following error: the package for FlashAttention2 doesn't seem to be installed.

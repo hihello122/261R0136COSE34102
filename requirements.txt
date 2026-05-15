@@ -7,3 +7,6 @@ bitsandbytes>=0.43.0
 accelerate>=0.30.0
 wandb
 tqdm
+codebleu
+tree-sitter==0.22.3
+tree-sitter-java==0.21.0

@@ -1,0 +1,33 @@
+{
+  "model": "deepseek-ai/deepseek-coder-1.3b-base",
+  "split": "test",
+  "overall": {
+    "total_samples": 81,
+    "exact_match_rate": 0.0,
+    "avg_bleu": 0.07532040561833171,
+    "avg_codebleu": 0.23827642360854792,
+    "avg_token_f1": 0.1537138568695018,
+    "avg_chrf": 0.12506158318731167,
+    "avg_edit_distance": 0.8971431682396541
+  },
+  "per_project": {
+    "eclipse": {
+      "count": 2,
+      "exact_match_rate": 0.0,
+      "avg_bleu": 0.2337738223726341,
+      "avg_codebleu": 0.25,
+      "avg_token_f1": 0.3545823195458232,
+      "avg_chrf": 0.2673910404965523,
+      "avg_edit_distance": 0.7990849662289088
+    },
+    "netty": {
+      "count": 79,
+      "exact_match_rate": 0.0,
+      "avg_bleu": 0.07130892671315948,
+      "avg_codebleu": 0.2379796242062327,
+      "avg_token_f1": 0.14862857933339244,
+      "avg_chrf": 0.12145830578707774,
+      "avg_edit_distance": 0.8996256543665084
+    }
+  }
+}

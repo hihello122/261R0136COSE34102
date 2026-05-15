@@ -6,7 +6,7 @@ ConGra Java merge conflict resolution - 평가 스크립트.
 지표:
   1. Exact Match Rate - resolution 문자열 완전 일치율
   2. BLEU - 토큰 단위 BLEU score
-  3. CodeBLEU - 코드 특화 BLEU (선택적, 라이브러리 설치 시)
+  3. CodeBLEU - 코드 특화 BLEU (AST + data-flow 반영)
   4. Edit Distance (Levenshtein) - 정규화된 편집 거리
 
 Usage:
@@ -70,8 +70,23 @@ def parse_args():
     return parser.parse_args()
 
 
+# deepseek-coder tokenizer.decode() 가 일으키는 두 가지 텍스트 손실을 보정한다.
+#   A) 공백 손실: 'import org.X' → 'importorg.X'
+#      - ';importX' → ';\nimportX'  (개행 복원)
+#      - 줄 시작 'importX' → 'import X'  (공백 복원)
+#   B) 개행 손실: '\n' 이 Ċ (U+010A, GPT-2 byte-level 표현) 로 남거나 완전히 사라짐
+#      - Ċ → '\n' 으로 치환
+_IMPORT_SPLIT_RE = re.compile(r';(?=(?:import|package)[a-zA-Z])')
+_IMPORT_SPACE_RE = re.compile(r'^(\s*)(import|package)(?=[a-zA-Z])', re.MULTILINE)
+
+
 def normalize_code(code: str) -> str:
     """비교를 위한 코드 정규화: 공백/줄바꿈 차이 무시."""
+    # B) Ċ (U+010A) → 실제 개행
+    code = code.replace('Ċ', '\n')
+    # A) import/package 문 공백·개행 복원
+    code = _IMPORT_SPLIT_RE.sub(';\n', code)
+    code = _IMPORT_SPACE_RE.sub(r'\1\2 ', code)
     lines = code.strip().splitlines()
     lines = [line.rstrip() for line in lines]
     # 빈 줄 제거
@@ -109,39 +124,127 @@ def compute_edit_distance(pred: str, gold: str) -> float:
     return prev[n] / max(m, n)
 
 
-def compute_bleu_score(pred: str, gold: str) -> float:
-    """간단한 line-level BLEU-4 계산."""
+def compute_codebleu_score(pred: str, gold: str) -> float:
+    """CodeBLEU: n-gram + AST + data-flow 기반 코드 유사도."""
+    try:
+        from codebleu import calc_codebleu
+        result = calc_codebleu([gold], [pred], lang="java", weights=(0.25, 0.25, 0.25, 0.25))
+        return result["codebleu"]
+    except Exception:
+        return 0.0
+
+
+def compute_bleu_score(pred: str, gold: str, tokenizer=None) -> float:
+    """토큰 레벨 BLEU-4.
+
+    tokenizer가 주어지면 모델 토크나이저로 인코딩한 token ID 시퀀스로 n-gram을
+    비교한다. deepseek-coder 계열 토크나이저는 decode() 시 공백을 복원하지 않으므로
+    문자열 split() 대신 token ID 비교가 정확하다.
+    tokenizer가 없으면 기존 방식(공백 split)으로 폴백.
+    """
+    import math
     from collections import Counter
 
     def ngrams(tokens, n):
         return [tuple(tokens[i:i+n]) for i in range(len(tokens) - n + 1)]
 
-    pred_tokens = normalize_code(pred).split()
-    gold_tokens = normalize_code(gold).split()
+    if tokenizer is not None:
+        pred_tokens = tokenizer.encode(pred.strip(), add_special_tokens=False)
+        gold_tokens = tokenizer.encode(gold.strip(), add_special_tokens=False)
+    else:
+        pred_tokens = normalize_code(pred).split()
+        gold_tokens = normalize_code(gold).split()
 
     if not pred_tokens or not gold_tokens:
         return 0.0
 
-    # Brevity penalty
-    bp = min(1.0, len(pred_tokens) / len(gold_tokens)) if gold_tokens else 0.0
+    bp = min(1.0, len(pred_tokens) / len(gold_tokens))
 
     scores = []
     for n in range(1, 5):
         pred_ng = Counter(ngrams(pred_tokens, n))
         gold_ng = Counter(ngrams(gold_tokens, n))
-        if not pred_ng:
+        total = sum(pred_ng.values())
+        if total == 0:
             scores.append(0.0)
             continue
-        clipped = sum(min(pred_ng[ng], gold_ng.get(ng, 0)) for ng in pred_ng)
-        total = sum(pred_ng.values())
-        scores.append(clipped / total if total > 0 else 0.0)
+        clipped = sum(min(cnt, gold_ng.get(ng, 0)) for ng, cnt in pred_ng.items())
+        scores.append(clipped / total)
 
     if any(s == 0 for s in scores):
         return 0.0
 
-    import math
     log_avg = sum(math.log(s) for s in scores) / 4
     return bp * math.exp(log_avg)
+
+
+def compute_token_f1(pred: str, gold: str, tokenizer=None) -> float:
+    """토큰 레벨 F1.
+
+    multiset 교집합 기반 precision/recall → F1.
+    tokenizer가 주어지면 token ID 시퀀스로 비교 (공백 손실 무관).
+    """
+    from collections import Counter
+
+    if tokenizer is not None:
+        pred_tokens = tokenizer.encode(pred.strip(), add_special_tokens=False)
+        gold_tokens = tokenizer.encode(gold.strip(), add_special_tokens=False)
+    else:
+        pred_tokens = normalize_code(pred).split()
+        gold_tokens = normalize_code(gold).split()
+
+    if not pred_tokens or not gold_tokens:
+        return 0.0
+
+    pred_cnt = Counter(pred_tokens)
+    gold_cnt = Counter(gold_tokens)
+    common = sum(min(pred_cnt[t], gold_cnt[t]) for t in pred_cnt)
+
+    if common == 0:
+        return 0.0
+
+    precision = common / len(pred_tokens)
+    recall = common / len(gold_tokens)
+    return 2 * precision * recall / (precision + recall)
+
+
+def compute_chrf(pred: str, gold: str, max_n: int = 6, beta: float = 1.0) -> float:
+    """chrF: 문자 n-gram F-score (order 1~max_n 평균).
+
+    beta=1 → precision/recall 동등 가중치.
+    공백 포함 문자 수준 비교이므로 토크나이저 공백 손실에 무관.
+    """
+    from collections import Counter
+
+    def char_ngrams(text, n):
+        return Counter(text[i:i+n] for i in range(len(text) - n + 1))
+
+    pred_str = pred.strip()
+    gold_str = gold.strip()
+
+    if not pred_str or not gold_str:
+        return 0.0
+
+    f_scores = []
+    for n in range(1, max_n + 1):
+        pred_ng = char_ngrams(pred_str, n)
+        gold_ng = char_ngrams(gold_str, n)
+        common = sum(min(pred_ng[g], gold_ng.get(g, 0)) for g in pred_ng)
+        total_pred = sum(pred_ng.values())
+        total_gold = sum(gold_ng.values())
+
+        if total_pred == 0 or total_gold == 0:
+            f_scores.append(0.0)
+            continue
+
+        p = common / total_pred
+        r = common / total_gold
+        if p + r == 0:
+            f_scores.append(0.0)
+        else:
+            f_scores.append((1 + beta ** 2) * p * r / (beta ** 2 * p + r))
+
+    return sum(f_scores) / len(f_scores) if f_scores else 0.0
 
 
 def load_model_and_tokenizer(args):
@@ -152,7 +255,14 @@ def load_model_and_tokenizer(args):
         bnb_4bit_compute_dtype=torch.bfloat16,
         bnb_4bit_use_double_quant=True,
     )
-    attn_impl = "eager" if args.no_flash_attn else "flash_attention_2"
+    if args.no_flash_attn:
+        attn_impl = "eager"
+    else:
+        try:
+            import flash_attn  # noqa: F401
+            attn_impl = "flash_attention_2"
+        except ImportError:
+            attn_impl = "eager"
 
     if args.model_dir:
         # LoRA adapter 로드
@@ -169,7 +279,7 @@ def load_model_and_tokenizer(args):
             base_model_name,
             quantization_config=bnb_config,
             attn_implementation=attn_impl,
-            torch_dtype=torch.bfloat16,
+            dtype=torch.bfloat16,
             trust_remote_code=True,
         )
 
@@ -183,7 +293,7 @@ def load_model_and_tokenizer(args):
             args.model_name,
             quantization_config=bnb_config,
             attn_implementation=attn_impl,
-            torch_dtype=torch.bfloat16,
+            dtype=torch.bfloat16,
             trust_remote_code=True,
         )
         tokenizer = AutoTokenizer.from_pretrained(args.model_name, trust_remote_code=True)
@@ -244,7 +354,10 @@ def main():
     print(f"\nGenerating resolutions (max_new_tokens={args.max_new_tokens})...")
 
     results = []
-    project_metrics = defaultdict(lambda: {"exact_match": [], "bleu": [], "edit_dist": []})
+    project_metrics = defaultdict(lambda: {
+        "exact_match": [], "bleu": [], "codebleu": [],
+        "token_f1": [], "chrf": [], "edit_dist": [],
+    })
 
     for i, sample in enumerate(tqdm(test_ds, desc="Evaluating")):
         prompt = sample["prompt"]
@@ -252,7 +365,10 @@ def main():
         pred = generate_resolution(model, tokenizer, prompt, args)
 
         em = compute_exact_match(pred, gold)
-        bleu = compute_bleu_score(pred, gold)
+        bleu = compute_bleu_score(pred, gold, tokenizer=tokenizer)
+        codebleu = compute_codebleu_score(pred, gold)
+        token_f1 = compute_token_f1(pred, gold, tokenizer=tokenizer)
+        chrf = compute_chrf(pred, gold)
         edit_dist = compute_edit_distance(pred, gold)
 
         result = {
@@ -261,6 +377,9 @@ def main():
             "file": sample["file"],
             "exact_match": em,
             "bleu": bleu,
+            "codebleu": codebleu,
+            "token_f1": token_f1,
+            "chrf": chrf,
             "edit_distance": edit_dist,
             "prediction": pred,
             "gold": gold,
@@ -270,25 +389,36 @@ def main():
         project = sample["project"]
         project_metrics[project]["exact_match"].append(int(em))
         project_metrics[project]["bleu"].append(bleu)
+        project_metrics[project]["codebleu"].append(codebleu)
+        project_metrics[project]["token_f1"].append(token_f1)
+        project_metrics[project]["chrf"].append(chrf)
         project_metrics[project]["edit_dist"].append(edit_dist)
 
     # ── 4. 집계 ──────────────────────────────────────────────────
     total = len(results)
+    def avg(key): return sum(r[key] for r in results) / total if total else 0
     overall = {
         "total_samples": total,
-        "exact_match_rate": sum(r["exact_match"] for r in results) / total if total else 0,
-        "avg_bleu": sum(r["bleu"] for r in results) / total if total else 0,
-        "avg_edit_distance": sum(r["edit_distance"] for r in results) / total if total else 0,
+        "exact_match_rate": avg("exact_match"),
+        "avg_bleu": avg("bleu"),
+        "avg_codebleu": avg("codebleu"),
+        "avg_token_f1": avg("token_f1"),
+        "avg_chrf": avg("chrf"),
+        "avg_edit_distance": avg("edit_distance"),
     }
 
     per_project = {}
     for proj, metrics in project_metrics.items():
         n = len(metrics["exact_match"])
+        def pavg(k): return sum(metrics[k]) / n
         per_project[proj] = {
             "count": n,
-            "exact_match_rate": sum(metrics["exact_match"]) / n,
-            "avg_bleu": sum(metrics["bleu"]) / n,
-            "avg_edit_distance": sum(metrics["edit_dist"]) / n,
+            "exact_match_rate": pavg("exact_match"),
+            "avg_bleu": pavg("bleu"),
+            "avg_codebleu": pavg("codebleu"),
+            "avg_token_f1": pavg("token_f1"),
+            "avg_chrf": pavg("chrf"),
+            "avg_edit_distance": pavg("edit_dist"),
         }
 
     # ── 5. 출력 ──────────────────────────────────────────────────
@@ -298,12 +428,16 @@ def main():
     print(f"  Samples:        {overall['total_samples']}")
     print(f"  Exact Match:    {overall['exact_match_rate']:.4f}")
     print(f"  BLEU:           {overall['avg_bleu']:.4f}")
+    print(f"  CodeBLEU:       {overall['avg_codebleu']:.4f}")
+    print(f"  Token-F1:       {overall['avg_token_f1']:.4f}")
+    print(f"  chrF:           {overall['avg_chrf']:.4f}")
     print(f"  Edit Distance:  {overall['avg_edit_distance']:.4f}")
 
     print("\nPer-project Results:")
     for proj, m in sorted(per_project.items()):
         print(f"  {proj:20s}  n={m['count']:4d}  EM={m['exact_match_rate']:.3f}  "
-              f"BLEU={m['avg_bleu']:.3f}  ED={m['avg_edit_distance']:.3f}")
+              f"BLEU={m['avg_bleu']:.3f}  CodeBLEU={m['avg_codebleu']:.3f}  "
+              f"F1={m['avg_token_f1']:.3f}  chrF={m['avg_chrf']:.3f}  ED={m['avg_edit_distance']:.3f}")
 
     # ── 6. 저장 ──────────────────────────────────────────────────
     model_tag = "finetuned" if args.model_dir else "base"
@@ -330,7 +464,8 @@ def main():
     failures.sort(key=lambda x: x["edit_distance"])
     print(f"\nClosest failures (lowest edit distance, top 5):")
     for r in failures[:5]:
-        print(f"  [{r['project']}/{r['file']}] ED={r['edit_distance']:.3f} BLEU={r['bleu']:.3f}")
+        print(f"  [{r['project']}/{r['file']}] ED={r['edit_distance']:.3f} "
+              f"BLEU={r['bleu']:.3f} F1={r['token_f1']:.3f} chrF={r['chrf']:.3f}")
         print(f"    Gold: {normalize_code(r['gold'])[:100]}...")
         print(f"    Pred: {normalize_code(r['prediction'])[:100]}...")
         print()

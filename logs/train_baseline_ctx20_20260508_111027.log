@@ -1,0 +1,19 @@
+========================================
+ ConGra QLoRA Training
+========================================
+ Mode:          baseline
+ Model:         deepseek-ai/deepseek-coder-1.3b-base
+ Dataset:       ./data/processed/dataset_baseline_ctx20
+ Output:        /opt/dlami/nvme/ckpts/baseline_ctx20
+ Batch:         2 x 2 = 4
+ LR:            2e-4
+ Epochs:        10 (patience=3)
+ Max seq len:   2048
+ LoRA:          r=16, alpha=32
+ WandB:         false
+========================================
+
+Traceback (most recent call last):
+  File "/home/ubuntu/final_project/train.py", line 26, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
