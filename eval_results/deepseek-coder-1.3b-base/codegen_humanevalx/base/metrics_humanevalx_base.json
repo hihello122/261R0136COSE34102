@@ -1,0 +1,11 @@
+{
+  "model": "deepseek-ai/deepseek-coder-1.3b-base",
+  "benchmark": "humanevalx-java",
+  "total_problems": 164,
+  "pass@1": 0.0,
+  "execution_available": true,
+  "avg_bleu": 0.036472303467775365,
+  "avg_codebleu": 0.17060184158809552,
+  "avg_chrf": 0.08505095042614608,
+  "avg_edit_distance": 0.8552346496182623
+}

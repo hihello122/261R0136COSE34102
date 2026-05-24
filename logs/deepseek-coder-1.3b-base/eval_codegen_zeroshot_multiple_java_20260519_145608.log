@@ -1,0 +1,337 @@
+========================================
+ Zero-shot | multiple_java | model: deepseek-ai/deepseek-coder-1.3b-base
+========================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading base model: deepseek-ai/deepseek-coder-1.3b-base
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+Loading weights:  10%|█         | 22/219 [00:00<00:00, 218.24it/s]Loading weights:  43%|████▎     | 94/219 [00:00<00:00, 506.50it/s]Loading weights:  75%|███████▍  | 164/219 [00:00<00:00, 593.77it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 575.05it/s]
+
+Loading MultiPL-E Java (nuprl/MultiPL-E, humaneval-java)...
+  158 problems
+MultiPL-E Java:   0%|          | 0/158 [00:00<?, ?it/s]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   1%|          | 1/158 [00:21<55:55, 21.37s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   1%|▏         | 2/158 [00:42<54:52, 21.11s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   2%|▏         | 3/158 [01:03<54:15, 21.00s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   3%|▎         | 4/158 [01:24<53:45, 20.95s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   3%|▎         | 5/158 [01:44<53:23, 20.94s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   4%|▍         | 6/158 [02:05<52:55, 20.89s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   4%|▍         | 7/158 [02:26<52:30, 20.86s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   5%|▌         | 8/158 [02:47<52:05, 20.84s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   6%|▌         | 9/158 [03:08<51:50, 20.87s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   6%|▋         | 10/158 [03:29<51:29, 20.87s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   7%|▋         | 11/158 [03:49<51:03, 20.84s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   8%|▊         | 12/158 [04:10<50:41, 20.83s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   8%|▊         | 13/158 [04:31<50:12, 20.78s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   9%|▉         | 14/158 [04:52<49:56, 20.81s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:   9%|▉         | 15/158 [05:13<49:43, 20.86s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  10%|█         | 16/158 [05:34<49:19, 20.84s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  11%|█         | 17/158 [05:54<48:51, 20.79s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  11%|█▏        | 18/158 [06:15<48:36, 20.84s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  12%|█▏        | 19/158 [06:36<48:08, 20.78s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  13%|█▎        | 20/158 [06:56<47:42, 20.74s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  13%|█▎        | 21/158 [07:17<47:19, 20.72s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  14%|█▍        | 22/158 [07:38<47:04, 20.77s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  15%|█▍        | 23/158 [07:59<46:42, 20.76s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  15%|█▌        | 24/158 [08:19<46:19, 20.74s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  16%|█▌        | 25/158 [08:40<46:01, 20.76s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  16%|█▋        | 26/158 [09:01<45:37, 20.74s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  17%|█▋        | 27/158 [09:22<45:19, 20.76s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  18%|█▊        | 28/158 [09:42<44:55, 20.74s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  18%|█▊        | 29/158 [10:03<44:31, 20.71s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  19%|█▉        | 30/158 [10:24<44:16, 20.75s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  20%|█▉        | 31/158 [10:45<44:10, 20.87s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  20%|██        | 32/158 [11:06<43:46, 20.85s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  21%|██        | 33/158 [11:27<43:18, 20.79s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  22%|██▏       | 34/158 [11:47<42:53, 20.76s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  22%|██▏       | 35/158 [12:08<42:38, 20.80s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  23%|██▎       | 36/158 [12:29<42:22, 20.84s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  23%|██▎       | 37/158 [12:50<42:03, 20.86s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  24%|██▍       | 38/158 [13:11<41:42, 20.85s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  25%|██▍       | 39/158 [13:32<41:21, 20.85s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  25%|██▌       | 40/158 [13:52<40:51, 20.78s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  26%|██▌       | 41/158 [14:13<40:28, 20.76s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  27%|██▋       | 42/158 [14:34<40:02, 20.71s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  27%|██▋       | 43/158 [14:54<39:45, 20.75s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  28%|██▊       | 44/158 [15:15<39:25, 20.75s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  28%|██▊       | 45/158 [15:36<39:03, 20.74s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  29%|██▉       | 46/158 [15:57<38:44, 20.76s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  30%|██▉       | 47/158 [16:17<38:20, 20.73s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  30%|███       | 48/158 [16:38<38:06, 20.79s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  31%|███       | 49/158 [16:59<37:44, 20.78s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  32%|███▏      | 50/158 [17:20<37:22, 20.76s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  32%|███▏      | 51/158 [17:41<37:04, 20.79s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  33%|███▎      | 52/158 [18:01<36:45, 20.80s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  34%|███▎      | 53/158 [18:22<36:28, 20.84s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  34%|███▍      | 54/158 [18:43<36:02, 20.80s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  35%|███▍      | 55/158 [19:04<35:38, 20.76s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  35%|███▌      | 56/158 [19:24<35:16, 20.75s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  36%|███▌      | 57/158 [19:45<35:01, 20.81s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  37%|███▋      | 58/158 [20:06<34:44, 20.85s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  37%|███▋      | 59/158 [20:27<34:25, 20.87s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  38%|███▊      | 60/158 [20:48<34:08, 20.90s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  39%|███▊      | 61/158 [21:10<33:58, 21.02s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  39%|███▉      | 62/158 [21:30<33:34, 20.99s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  40%|███▉      | 63/158 [21:51<33:07, 20.92s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  41%|████      | 64/158 [22:12<32:46, 20.92s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  41%|████      | 65/158 [22:33<32:25, 20.92s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  42%|████▏     | 66/158 [22:56<33:12, 21.66s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  42%|████▏     | 67/158 [23:21<34:06, 22.49s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  43%|████▎     | 68/158 [23:45<34:19, 22.89s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  44%|████▎     | 69/158 [24:09<34:29, 23.26s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  44%|████▍     | 70/158 [24:33<34:33, 23.57s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  45%|████▍     | 71/158 [24:58<34:52, 24.05s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  46%|████▌     | 72/158 [25:23<34:41, 24.20s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  46%|████▌     | 73/158 [25:47<34:19, 24.23s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  47%|████▋     | 74/158 [26:11<33:48, 24.14s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  47%|████▋     | 75/158 [26:35<33:29, 24.21s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  48%|████▊     | 76/158 [26:59<32:58, 24.13s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  49%|████▊     | 77/158 [27:23<32:29, 24.06s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  49%|████▉     | 78/158 [27:48<32:14, 24.18s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  50%|█████     | 79/158 [28:12<31:52, 24.21s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  51%|█████     | 80/158 [28:37<31:36, 24.32s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  51%|█████▏    | 81/158 [29:01<31:07, 24.25s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  52%|█████▏    | 82/158 [29:24<30:30, 24.08s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  53%|█████▎    | 83/158 [29:48<30:07, 24.09s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  53%|█████▎    | 84/158 [30:13<29:59, 24.32s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  54%|█████▍    | 85/158 [30:38<29:38, 24.36s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  54%|█████▍    | 86/158 [31:02<29:09, 24.30s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  55%|█████▌    | 87/158 [31:26<28:46, 24.32s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  56%|█████▌    | 88/158 [31:51<28:27, 24.40s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  56%|█████▋    | 89/158 [32:15<27:53, 24.26s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  57%|█████▋    | 90/158 [32:39<27:32, 24.30s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  58%|█████▊    | 91/158 [33:04<27:08, 24.31s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  58%|█████▊    | 92/158 [33:28<26:40, 24.26s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  59%|█████▉    | 93/158 [33:52<26:09, 24.15s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  59%|█████▉    | 94/158 [34:16<25:53, 24.27s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  60%|██████    | 95/158 [34:41<25:35, 24.38s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  61%|██████    | 96/158 [35:05<25:12, 24.39s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  61%|██████▏   | 97/158 [35:30<24:49, 24.42s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  62%|██████▏   | 98/158 [35:54<24:27, 24.46s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  63%|██████▎   | 99/158 [36:19<24:10, 24.58s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  63%|██████▎   | 100/158 [36:43<23:38, 24.46s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  64%|██████▍   | 101/158 [37:08<23:10, 24.40s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  65%|██████▍   | 102/158 [37:32<22:47, 24.42s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  65%|██████▌   | 103/158 [37:56<22:23, 24.43s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  66%|██████▌   | 104/158 [38:21<22:07, 24.58s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  66%|██████▋   | 105/158 [38:46<21:41, 24.55s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  67%|██████▋   | 106/158 [39:10<21:11, 24.46s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  68%|██████▊   | 107/158 [39:35<20:49, 24.50s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  68%|██████▊   | 108/158 [39:59<20:27, 24.55s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  69%|██████▉   | 109/158 [40:24<20:01, 24.51s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  70%|██████▉   | 110/158 [40:48<19:35, 24.49s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  70%|███████   | 111/158 [41:13<19:09, 24.45s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  71%|███████   | 112/158 [41:37<18:51, 24.60s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  72%|███████▏  | 113/158 [42:02<18:26, 24.58s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  72%|███████▏  | 114/158 [42:26<17:58, 24.52s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  73%|███████▎  | 115/158 [42:51<17:33, 24.49s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  73%|███████▎  | 116/158 [43:15<17:10, 24.54s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  74%|███████▍  | 117/158 [43:40<16:45, 24.53s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  75%|███████▍  | 118/158 [44:04<16:17, 24.45s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  75%|███████▌  | 119/158 [44:29<15:53, 24.46s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  76%|███████▌  | 120/158 [44:53<15:30, 24.48s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  77%|███████▋  | 121/158 [45:18<15:07, 24.53s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  77%|███████▋  | 122/158 [45:42<14:40, 24.47s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  78%|███████▊  | 123/158 [46:07<14:18, 24.53s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  78%|███████▊  | 124/158 [46:31<13:52, 24.48s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  79%|███████▉  | 125/158 [46:56<13:26, 24.44s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  80%|███████▉  | 126/158 [47:20<13:01, 24.41s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  80%|████████  | 127/158 [47:45<12:39, 24.50s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  81%|████████  | 128/158 [48:09<12:11, 24.39s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  82%|████████▏ | 129/158 [48:33<11:46, 24.38s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  82%|████████▏ | 130/158 [48:58<11:23, 24.40s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  83%|████████▎ | 131/158 [49:22<10:57, 24.36s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  84%|████████▎ | 132/158 [49:46<10:32, 24.32s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  84%|████████▍ | 133/158 [50:10<10:07, 24.29s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  85%|████████▍ | 134/158 [50:35<09:44, 24.34s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  85%|████████▌ | 135/158 [50:59<09:22, 24.46s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  86%|████████▌ | 136/158 [51:24<08:55, 24.36s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  87%|████████▋ | 137/158 [51:48<08:32, 24.43s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  87%|████████▋ | 138/158 [52:13<08:07, 24.39s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  88%|████████▊ | 139/158 [52:37<07:41, 24.31s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  89%|████████▊ | 140/158 [53:01<07:17, 24.33s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  89%|████████▉ | 141/158 [53:25<06:53, 24.31s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  90%|████████▉ | 142/158 [53:49<06:28, 24.28s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  91%|█████████ | 143/158 [54:14<06:05, 24.35s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  91%|█████████ | 144/158 [54:38<05:40, 24.31s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  92%|█████████▏| 145/158 [55:03<05:17, 24.41s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  92%|█████████▏| 146/158 [55:27<04:52, 24.41s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  93%|█████████▎| 147/158 [55:52<04:28, 24.42s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  94%|█████████▎| 148/158 [56:16<04:04, 24.41s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  94%|█████████▍| 149/158 [56:40<03:39, 24.38s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  95%|█████████▍| 150/158 [57:05<03:15, 24.43s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  96%|█████████▌| 151/158 [57:29<02:51, 24.44s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  96%|█████████▌| 152/158 [57:54<02:26, 24.44s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  97%|█████████▋| 153/158 [58:18<02:01, 24.25s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  97%|█████████▋| 154/158 [58:42<01:37, 24.36s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  98%|█████████▊| 155/158 [59:07<01:13, 24.42s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  99%|█████████▊| 156/158 [59:32<00:49, 24.51s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java:  99%|█████████▉| 157/158 [59:56<00:24, 24.47s/it]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+MultiPL-E Java: 100%|██████████| 158/158 [1:00:20<00:00, 24.31s/it]MultiPL-E Java: 100%|██████████| 158/158 [1:00:20<00:00, 22.91s/it]
+
+============================================================
+MultiPL-E Java Results
+============================================================
+  Problems:  158
+  pass@1:    0.0000 (실행 기반)
+
+Metrics saved to eval_results/codegen_multiple_java/base/metrics_multiple_java_base.json
+Predictions saved to eval_results/codegen_multiple_java/base/predictions_multiple_java_base.jsonl

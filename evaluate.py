@@ -28,6 +28,8 @@ import argparse
 import json
 import os
 import re
+import subprocess
+import tempfile
 from collections import defaultdict
 from pathlib import Path
 
@@ -68,6 +70,13 @@ def parse_args():
     # Output
     parser.add_argument("--output_dir", type=str, default="./eval_results")
     parser.add_argument("--no_flash_attn", action="store_true")
+
+    # Benchmark
+    parser.add_argument(
+        "--benchmark", type=str, default="congra",
+        choices=["congra", "humanevalx"],
+        help="평가 벤치마크 (congra: ConGra 병합충돌 해결, humanevalx: HumanEval-X Java)",
+    )
 
     return parser.parse_args()
 
@@ -335,12 +344,207 @@ def generate_resolution(model, tokenizer, prompt: str, args) -> str:
     return result
 
 
-def main():
-    args = parse_args()
+# ── HumanEval-X Java 벤치마크 지원 ──────────────────────────────────────────
 
-    output_dir = Path(args.output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
+def check_java_available() -> bool:
+    """javac/java 실행 가능 여부 확인."""
+    try:
+        r = subprocess.run(["javac", "-version"], capture_output=True, timeout=5)
+        return r.returncode == 0
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        return False
 
+
+def _compile_and_run_java(files: dict, main_class: str, timeout: int = 10) -> bool:
+    """여러 .java 파일을 컴파일하고 main_class를 실행. exit 0이면 True."""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        for fname, content in files.items():
+            with open(os.path.join(tmpdir, fname), "w", encoding="utf-8") as f:
+                f.write(content)
+        try:
+            r = subprocess.run(
+                ["javac"] + list(files.keys()),
+                cwd=tmpdir, capture_output=True, timeout=timeout,
+            )
+            if r.returncode != 0:
+                return False
+            r = subprocess.run(
+                ["java", "-cp", ".", main_class],
+                cwd=tmpdir, capture_output=True, timeout=timeout,
+            )
+            return r.returncode == 0
+        except subprocess.TimeoutExpired:
+            return False
+
+
+def _extract_test_class_name(test_code: str, fallback: str) -> str:
+    """테스트 코드에서 public class 이름을 추출."""
+    m = re.search(r'\bpublic\s+class\s+(\w+)', test_code)
+    return m.group(1) if m else fallback
+
+
+def truncate_at_stop(text: str, stop_sequences: list) -> str:
+    """생성 텍스트를 첫 번째 stop sequence 직후에서 자름."""
+    for stop in stop_sequences:
+        idx = text.find(stop)
+        if idx != -1:
+            return text[:idx + len(stop)]
+    return text
+
+
+def load_humanevalx_java(max_samples=None):
+    """HumanEval-X Java test split 로드 (THUDM/humaneval-x).
+
+    datasets >= 2.14 에서 loading script가 지원되지 않으므로
+    parquet/jsonl 직접 로드 → hub 파일 탐색 순으로 fallback.
+    """
+    from datasets import load_dataset, Dataset
+
+    # ── 1) jsonl 직접 로드 (loading script 우회, 실제 파일 경로 우선) ──
+    _JSONL_PATTERNS = [
+        "hf://datasets/THUDM/humaneval-x/data/java/data/humaneval.jsonl",   # 실제 경로
+        "hf://datasets/THUDM/humaneval-x/data/java/data/test*.jsonl.gz",
+        "hf://datasets/THUDM/humaneval-x/data/java/data/test*.jsonl",
+        "hf://datasets/THUDM/humaneval-x/data/java/test*.jsonl",
+    ]
+    for pat in _JSONL_PATTERNS:
+        try:
+            ds = load_dataset("json", data_files={"test": pat}, split="test")
+            if max_samples:
+                ds = ds.select(range(min(max_samples, len(ds))))
+            return ds
+        except Exception:
+            pass
+
+    # ── 2) parquet 직접 로드 ─────────────────────────────────────
+    _PARQUET_PATTERNS = [
+        "hf://datasets/THUDM/humaneval-x/data/java/data/test-*.parquet",
+        "hf://datasets/THUDM/humaneval-x/data/java/test-*.parquet",
+    ]
+    for pat in _PARQUET_PATTERNS:
+        try:
+            ds = load_dataset("parquet", data_files={"test": pat}, split="test")
+            if max_samples:
+                ds = ds.select(range(min(max_samples, len(ds))))
+            return ds
+        except Exception:
+            pass
+
+    # ── 3) Hub API로 파일 탐색 후 다운로드 ──────────────────────
+    try:
+        import gzip as _gzip
+        import pandas as _pd
+        from huggingface_hub import HfApi, hf_hub_download
+
+        all_files = list(HfApi().list_repo_files("THUDM/humaneval-x", repo_type="dataset"))
+        java_files = [
+            f for f in all_files
+            if re.search(r"java.*test.*\.(parquet|jsonl(\.gz)?)$", f, re.IGNORECASE)
+        ]
+        if not java_files:
+            raise FileNotFoundError("No Java test files found in THUDM/humaneval-x repo")
+
+        local = hf_hub_download("THUDM/humaneval-x", java_files[0], repo_type="dataset")
+
+        if local.endswith(".parquet"):
+            ds = Dataset.from_pandas(_pd.read_parquet(local))
+        else:
+            opener = _gzip.open if local.endswith(".gz") else open
+            rows = []
+            with opener(local, "rt", encoding="utf-8") as fh:
+                for line in fh:
+                    line = line.strip()
+                    if line:
+                        rows.append(json.loads(line))
+            ds = Dataset.from_list(rows)
+
+        if max_samples:
+            ds = ds.select(range(min(max_samples, len(ds))))
+        return ds
+
+    except Exception as e:
+        raise RuntimeError(
+            f"HumanEval-X Java 로드 실패: {e}\n"
+            "datasets >= 2.14 에서 loading script가 지원되지 않습니다. "
+            "pip install 'datasets<2.14' 로 다운그레이드하세요."
+        ) from e
+
+
+def run_humanevalx_eval(model, tokenizer, args) -> tuple:
+    """HumanEval-X Java 벤치마크 평가."""
+    print("\nLoading HumanEval-X Java (THUDM/humaneval-x)...")
+    ds = load_humanevalx_java(args.max_samples)
+    print(f"  {len(ds)} problems")
+
+    java_ok = check_java_available()
+    if not java_ok:
+        print("  [Warning] javac/java를 찾을 수 없음 – 실행 테스트 건너뜀, 텍스트 지표만 보고")
+
+    # HumanEval-X Java: 메서드 + 클래스 닫는 괄호에서 중단
+    stop_seqs = ["\n}\n}", "\n    }\n}"]
+    results = []
+
+    for sample in tqdm(ds, desc="HumanEval-X Java"):
+        prompt = sample["prompt"]          # imports + class Solution { + method sig
+        gold = sample["canonical_solution"]
+        test_code = sample["test"]         # class Main { public static void main... }
+
+        raw_pred = generate_resolution(model, tokenizer, prompt, args)
+        pred = truncate_at_stop(raw_pred, stop_seqs)
+
+        passed = False
+        if java_ok:
+            test_class = _extract_test_class_name(test_code, "Main")
+            passed = _compile_and_run_java(
+                {"Solution.java": prompt + pred, f"{test_class}.java": test_code},
+                main_class=test_class,
+            )
+
+        bleu = compute_bleu_score(pred, gold, tokenizer=tokenizer)
+        codebleu = compute_codebleu_score(pred, gold)
+        chrf = compute_chrf(pred, gold)
+        edit_dist = compute_edit_distance(pred, gold)
+
+        results.append({
+            "task_id": sample["task_id"],
+            "passed": passed,
+            "bleu": bleu,
+            "codebleu": codebleu,
+            "chrf": chrf,
+            "edit_distance": edit_dist,
+            "prediction": pred,
+            "gold": gold,
+        })
+
+    total = len(results)
+    def avg(k): return sum(r[k] for r in results) / total if total else 0
+    overall = {
+        "benchmark": "humanevalx-java",
+        "total_problems": total,
+        "pass@1": avg("passed"),
+        "execution_available": java_ok,
+        "avg_bleu": avg("bleu"),
+        "avg_codebleu": avg("codebleu"),
+        "avg_chrf": avg("chrf"),
+        "avg_edit_distance": avg("edit_distance"),
+    }
+
+    suffix = " (실행 기반)" if java_ok else " (N/A – Java 런타임 없음)"
+    print("\n" + "=" * 60)
+    print("HumanEval-X Java Results")
+    print("=" * 60)
+    print(f"  Problems:    {overall['total_problems']}")
+    print(f"  pass@1:      {overall['pass@1']:.4f}{suffix}")
+    print(f"  BLEU:        {overall['avg_bleu']:.4f}")
+    print(f"  CodeBLEU:    {overall['avg_codebleu']:.4f}")
+    print(f"  chrF:        {overall['avg_chrf']:.4f}")
+    print(f"  Edit Dist:   {overall['avg_edit_distance']:.4f}")
+
+    return overall, results
+
+
+def _run_congra_eval(model, tokenizer, args, output_dir: Path):
+    """ConGra 병합 충돌 해결 벤치마크 평가."""
     # ── 1. 데이터 로드 ───────────────────────────────────────────
     print("Loading dataset...")
     dataset = load_from_disk(args.dataset_dir)
@@ -349,10 +553,7 @@ def main():
         test_ds = test_ds.select(range(min(args.max_samples, len(test_ds))))
     print(f"  {args.split}: {len(test_ds)} samples")
 
-    # ── 2. 모델 로드 ─────────────────────────────────────────────
-    model, tokenizer = load_model_and_tokenizer(args)
-
-    # ── 3. 생성 및 평가 ──────────────────────────────────────────
+    # ── 2. 생성 및 평가 ──────────────────────────────────────────
     print(f"\nGenerating resolutions (max_new_tokens={args.max_new_tokens})...")
 
     results = []
@@ -396,7 +597,7 @@ def main():
         project_metrics[project]["chrf"].append(chrf)
         project_metrics[project]["edit_dist"].append(edit_dist)
 
-    # ── 4. 집계 ──────────────────────────────────────────────────
+    # ── 3. 집계 ──────────────────────────────────────────────────
     total = len(results)
     def avg(key): return sum(r[key] for r in results) / total if total else 0
     overall = {
@@ -423,7 +624,7 @@ def main():
             "avg_edit_distance": pavg("edit_dist"),
         }
 
-    # ── 5. 출력 ──────────────────────────────────────────────────
+    # ── 4. 출력 ──────────────────────────────────────────────────
     print("\n" + "=" * 60)
     print("Overall Results")
     print("=" * 60)
@@ -441,7 +642,7 @@ def main():
               f"BLEU={m['avg_bleu']:.3f}  CodeBLEU={m['avg_codebleu']:.3f}  "
               f"F1={m['avg_token_f1']:.3f}  chrF={m['avg_chrf']:.3f}  ED={m['avg_edit_distance']:.3f}")
 
-    # ── 6. 저장 ──────────────────────────────────────────────────
+    # ── 5. 저장 ──────────────────────────────────────────────────
     model_tag = "finetuned" if args.model_dir else "base"
     summary = {
         "model": args.model_dir or args.model_name,
@@ -454,14 +655,12 @@ def main():
         json.dump(summary, f, indent=2, ensure_ascii=False)
     print(f"\nMetrics saved to {summary_path}")
 
-    # 전체 prediction 저장
     preds_path = output_dir / f"predictions_{model_tag}.jsonl"
     with open(preds_path, "w") as f:
         for r in results:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
     print(f"Predictions saved to {preds_path}")
 
-    # 오답 분석용 - EM 실패 케이스 상위 N개
     failures = [r for r in results if not r["exact_match"]]
     failures.sort(key=lambda x: x["edit_distance"])
     print(f"\nClosest failures (lowest edit distance, top 5):")
@@ -471,6 +670,35 @@ def main():
         print(f"    Gold: {normalize_code(r['gold'])[:100]}...")
         print(f"    Pred: {normalize_code(r['prediction'])[:100]}...")
         print()
+
+
+def main():
+    args = parse_args()
+
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # ── 모델 로드 ─────────────────────────────────────────────────
+    model, tokenizer = load_model_and_tokenizer(args)
+
+    # ── 벤치마크 분기 ─────────────────────────────────────────────
+    if args.benchmark == "congra":
+        _run_congra_eval(model, tokenizer, args, output_dir)
+
+    elif args.benchmark == "humanevalx":
+        overall, results = run_humanevalx_eval(model, tokenizer, args)
+        model_tag = "finetuned" if args.model_dir else "base"
+        summary = {"model": args.model_dir or args.model_name, **overall}
+        summary_path = output_dir / f"metrics_humanevalx_{model_tag}.json"
+        with open(summary_path, "w") as f:
+            json.dump(summary, f, indent=2, ensure_ascii=False)
+        print(f"\nMetrics saved to {summary_path}")
+
+        preds_path = output_dir / f"predictions_humanevalx_{model_tag}.jsonl"
+        with open(preds_path, "w") as f:
+            for r in results:
+                f.write(json.dumps(r, ensure_ascii=False) + "\n")
+        print(f"Predictions saved to {preds_path}")
 
 
 if __name__ == "__main__":

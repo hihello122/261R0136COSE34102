@@ -1,0 +1,7 @@
+{
+  "model": "deepseek-ai/deepseek-coder-1.3b-base",
+  "benchmark": "multiple-java",
+  "total_problems": 158,
+  "pass@1": 0.0,
+  "execution_available": true
+}

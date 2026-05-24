@@ -1,0 +1,11 @@
+{
+  "model": "./ckpts/baseline_ctx20/final",
+  "benchmark": "humanevalx-java",
+  "total_problems": 164,
+  "pass@1": 0.0,
+  "execution_available": true,
+  "avg_bleu": 0.04310676618379673,
+  "avg_codebleu": 0.21634416721401042,
+  "avg_chrf": 0.08730937337730489,
+  "avg_edit_distance": 0.9068741751627009
+}

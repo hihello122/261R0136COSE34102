@@ -11,4 +11,5 @@ __pycache__/
 
 # 환경
 .env
+
 *.egg-info/

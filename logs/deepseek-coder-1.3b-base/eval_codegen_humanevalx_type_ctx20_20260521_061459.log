@@ -1,0 +1,16 @@
+========================================
+ Fine-tuned | humanevalx | mode: type | ctx: 20
+ Model:  ./ckpts/type_ctx20/final
+ Output: ./eval_results/codegen_humanevalx/type_ctx20
+========================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading base model: deepseek-ai/deepseek-coder-1.3b-base
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+Loading weights:  10%|█         | 22/219 [00:00<00:00, 217.97it/s]Loading weights:  43%|████▎     | 94/219 [00:00<00:00, 506.69it/s]Loading weights:  76%|███████▌  | 166/219 [00:00<00:00, 596.77it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 576.64it/s]
+Loading LoRA adapter: ./ckpts/type_ctx20/final
+
+Loading HumanEval-X Java (THUDM/humaneval-x)...
+  164 problems
+HumanEval-X Java:   0%|          | 0/164 [00:00<?, ?it/s]/home/ubuntu/miniconda3/envs/nlp/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
