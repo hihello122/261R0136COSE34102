@@ -1,0 +1,363 @@
+========================================
+ Fine-tuned | humanevalx | mode: ast | ctx: 20
+ Model:  ./ckpts/ast_ctx20_qwen2.5-coder-1.5b/final
+ Base:   /opt/dlami/nvme/models/qwen2.5-coder-1.5b
+ Output: ./eval_results/qwen2.5-coder-1.5b/codegen_humanevalx/ast_ctx20
+========================================
+Loading base model: /opt/dlami/nvme/models/qwen2.5-coder-1.5b
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+Loading weights:   4%|▍         | 15/338 [00:00<00:02, 148.32it/s]Loading weights:  33%|███▎      | 113/338 [00:00<00:00, 628.98it/s]Loading weights:  64%|██████▍   | 217/338 [00:00<00:00, 814.37it/s]Loading weights:  93%|█████████▎| 316/338 [00:00<00:00, 874.69it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 795.92it/s]
+Loading LoRA adapter: ./ckpts/ast_ctx20_qwen2.5-coder-1.5b/final
+
+Loading HumanEval-X Java (THUDM/humaneval-x)...
+  164 problems
+HumanEval-X Java:   0%|          | 0/164 [00:00<?, ?it/s]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   1%|          | 1/164 [00:45<2:02:28, 45.08s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   1%|          | 2/164 [01:29<2:01:03, 44.84s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+WARNING:root:WARNING: There is no reference data-flows extracted from the whole corpus, and the data-flow match score degenerates to 0. Please consider ignoring this score.
+HumanEval-X Java:   2%|▏         | 3/164 [02:13<1:58:53, 44.31s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   2%|▏         | 4/164 [02:57<1:57:52, 44.20s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   3%|▎         | 5/164 [03:41<1:56:50, 44.09s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   4%|▎         | 6/164 [04:25<1:56:16, 44.16s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   4%|▍         | 7/164 [05:09<1:55:32, 44.16s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   5%|▍         | 8/164 [05:53<1:54:46, 44.14s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   5%|▌         | 9/164 [06:37<1:53:47, 44.05s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   6%|▌         | 10/164 [07:21<1:52:55, 43.99s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   7%|▋         | 11/164 [08:05<1:52:09, 43.98s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   7%|▋         | 12/164 [08:49<1:51:17, 43.93s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   8%|▊         | 13/164 [09:33<1:50:35, 43.94s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   9%|▊         | 14/164 [10:17<1:49:55, 43.97s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   9%|▉         | 15/164 [11:01<1:48:55, 43.86s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  10%|▉         | 16/164 [11:45<1:48:33, 44.01s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  10%|█         | 17/164 [12:29<1:47:33, 43.90s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  11%|█         | 18/164 [13:12<1:46:35, 43.81s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  12%|█▏        | 19/164 [13:56<1:46:01, 43.87s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  12%|█▏        | 20/164 [14:40<1:45:14, 43.85s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  13%|█▎        | 21/164 [15:24<1:44:42, 43.93s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  13%|█▎        | 22/164 [16:08<1:43:46, 43.85s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  14%|█▍        | 23/164 [16:19<1:20:21, 34.20s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+WARNING:root:WARNING: There is no reference data-flows extracted from the whole corpus, and the data-flow match score degenerates to 0. Please consider ignoring this score.
+HumanEval-X Java:  15%|█▍        | 24/164 [17:03<1:26:28, 37.06s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  15%|█▌        | 25/164 [17:47<1:30:41, 39.15s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  16%|█▌        | 26/164 [18:31<1:33:36, 40.70s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  16%|█▋        | 27/164 [18:47<1:15:54, 33.25s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  17%|█▋        | 28/164 [19:31<1:22:20, 36.33s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+WARNING:root:WARNING: There is no reference data-flows extracted from the whole corpus, and the data-flow match score degenerates to 0. Please consider ignoring this score.
+HumanEval-X Java:  18%|█▊        | 29/164 [20:14<1:26:40, 38.52s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  18%|█▊        | 30/164 [20:59<1:29:59, 40.29s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  19%|█▉        | 31/164 [21:42<1:31:29, 41.27s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  20%|█▉        | 32/164 [22:26<1:32:36, 42.09s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  20%|██        | 33/164 [23:10<1:33:09, 42.67s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  21%|██        | 34/164 [23:54<1:33:18, 43.07s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  21%|██▏       | 35/164 [24:38<1:32:58, 43.24s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+WARNING:root:WARNING: There is no reference data-flows extracted from the whole corpus, and the data-flow match score degenerates to 0. Please consider ignoring this score.
+HumanEval-X Java:  22%|██▏       | 36/164 [25:22<1:32:38, 43.42s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  23%|██▎       | 37/164 [26:06<1:32:10, 43.55s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  23%|██▎       | 38/164 [26:50<1:31:36, 43.62s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  24%|██▍       | 39/164 [27:34<1:31:09, 43.76s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  24%|██▍       | 40/164 [28:17<1:30:27, 43.77s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  25%|██▌       | 41/164 [29:02<1:30:04, 43.94s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  26%|██▌       | 42/164 [29:46<1:29:27, 43.99s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  26%|██▌       | 43/164 [30:30<1:28:44, 44.00s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  27%|██▋       | 44/164 [31:15<1:28:31, 44.27s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  27%|██▋       | 45/164 [31:59<1:27:34, 44.16s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+WARNING:root:WARNING: There is no reference data-flows extracted from the whole corpus, and the data-flow match score degenerates to 0. Please consider ignoring this score.
+HumanEval-X Java:  28%|██▊       | 46/164 [32:43<1:26:52, 44.17s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  29%|██▊       | 47/164 [33:27<1:25:47, 44.00s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  29%|██▉       | 48/164 [34:11<1:25:04, 44.01s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  30%|██▉       | 49/164 [34:56<1:24:56, 44.32s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  30%|███       | 50/164 [35:40<1:24:02, 44.23s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  31%|███       | 51/164 [36:24<1:23:21, 44.26s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  32%|███▏      | 52/164 [37:08<1:22:23, 44.14s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  32%|███▏      | 53/164 [37:52<1:21:35, 44.11s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+WARNING:root:WARNING: There is no reference data-flows extracted from the whole corpus, and the data-flow match score degenerates to 0. Please consider ignoring this score.
+HumanEval-X Java:  33%|███▎      | 54/164 [38:36<1:20:45, 44.05s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  34%|███▎      | 55/164 [39:20<1:20:05, 44.08s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  34%|███▍      | 56/164 [40:04<1:19:16, 44.04s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  35%|███▍      | 57/164 [40:48<1:18:25, 43.98s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  35%|███▌      | 58/164 [41:32<1:17:41, 43.97s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  36%|███▌      | 59/164 [42:16<1:16:55, 43.96s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  37%|███▋      | 60/164 [43:00<1:16:14, 43.98s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  37%|███▋      | 61/164 [43:43<1:15:20, 43.89s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  38%|███▊      | 62/164 [44:27<1:14:39, 43.92s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  38%|███▊      | 63/164 [45:11<1:13:52, 43.88s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  39%|███▉      | 64/164 [45:55<1:13:07, 43.87s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  40%|███▉      | 65/164 [46:39<1:12:23, 43.87s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  40%|████      | 66/164 [47:23<1:11:36, 43.84s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  41%|████      | 67/164 [48:07<1:10:56, 43.88s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  41%|████▏     | 68/164 [48:50<1:10:06, 43.82s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  42%|████▏     | 69/164 [49:08<57:14, 36.15s/it]  /home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  43%|████▎     | 70/164 [49:52<1:00:19, 38.50s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  43%|████▎     | 71/164 [50:36<1:02:09, 40.10s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  44%|████▍     | 72/164 [51:21<1:03:24, 41.35s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  45%|████▍     | 73/164 [52:05<1:04:02, 42.23s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  45%|████▌     | 74/164 [52:49<1:04:06, 42.74s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  46%|████▌     | 75/164 [53:34<1:04:23, 43.41s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  46%|████▋     | 76/164 [54:18<1:03:53, 43.57s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  47%|████▋     | 77/164 [55:02<1:03:23, 43.72s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  48%|████▊     | 78/164 [55:46<1:02:42, 43.75s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  48%|████▊     | 79/164 [56:29<1:01:57, 43.73s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+WARNING:root:WARNING: There is no reference data-flows extracted from the whole corpus, and the data-flow match score degenerates to 0. Please consider ignoring this score.
+HumanEval-X Java:  49%|████▉     | 80/164 [57:13<1:01:14, 43.75s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  49%|████▉     | 81/164 [57:57<1:00:31, 43.75s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  50%|█████     | 82/164 [58:41<59:55, 43.85s/it]  /home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  51%|█████     | 83/164 [59:25<59:07, 43.79s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  51%|█████     | 84/164 [1:00:09<58:29, 43.87s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  52%|█████▏    | 85/164 [1:00:52<57:45, 43.87s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  52%|█████▏    | 86/164 [1:01:36<57:03, 43.89s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  53%|█████▎    | 87/164 [1:02:20<56:14, 43.82s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  54%|█████▎    | 88/164 [1:03:04<55:32, 43.85s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  54%|█████▍    | 89/164 [1:03:48<54:47, 43.83s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  55%|█████▍    | 90/164 [1:04:32<54:05, 43.85s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  55%|█████▌    | 91/164 [1:05:15<53:19, 43.82s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  56%|█████▌    | 92/164 [1:05:59<52:30, 43.76s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  57%|█████▋    | 93/164 [1:06:43<51:42, 43.69s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  57%|█████▋    | 94/164 [1:07:26<51:03, 43.76s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  58%|█████▊    | 95/164 [1:08:10<50:19, 43.75s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  59%|█████▊    | 96/164 [1:08:54<49:38, 43.80s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  59%|█████▉    | 97/164 [1:09:38<48:55, 43.81s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  60%|█████▉    | 98/164 [1:10:22<48:07, 43.74s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  60%|██████    | 99/164 [1:11:05<47:21, 43.72s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  61%|██████    | 100/164 [1:11:49<46:34, 43.67s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  62%|██████▏   | 101/164 [1:12:08<38:01, 36.21s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  62%|██████▏   | 102/164 [1:12:51<39:45, 38.47s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  63%|██████▎   | 103/164 [1:13:35<40:38, 39.97s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  63%|██████▎   | 104/164 [1:13:51<32:58, 32.98s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  64%|██████▍   | 105/164 [1:14:36<35:46, 36.38s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  65%|██████▍   | 106/164 [1:15:19<37:14, 38.53s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  65%|██████▌   | 107/164 [1:16:03<38:03, 40.05s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  66%|██████▌   | 108/164 [1:16:47<38:27, 41.21s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  66%|██████▋   | 109/164 [1:17:30<38:25, 41.91s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  67%|██████▋   | 110/164 [1:18:14<38:12, 42.46s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  68%|██████▊   | 111/164 [1:18:58<37:50, 42.84s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  68%|██████▊   | 112/164 [1:19:41<37:18, 43.05s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  69%|██████▉   | 113/164 [1:20:25<36:45, 43.24s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  70%|██████▉   | 114/164 [1:21:09<36:06, 43.33s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  70%|███████   | 115/164 [1:21:53<35:31, 43.50s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  71%|███████   | 116/164 [1:22:36<34:53, 43.61s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  71%|███████▏  | 117/164 [1:23:20<34:10, 43.64s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  72%|███████▏  | 118/164 [1:24:04<33:26, 43.61s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  73%|███████▎  | 119/164 [1:24:47<32:43, 43.62s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  73%|███████▎  | 120/164 [1:25:31<32:01, 43.66s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  74%|███████▍  | 121/164 [1:26:15<31:20, 43.74s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  74%|███████▍  | 122/164 [1:26:59<30:35, 43.70s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  75%|███████▌  | 123/164 [1:27:42<29:49, 43.64s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  76%|███████▌  | 124/164 [1:28:26<29:08, 43.72s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  76%|███████▌  | 125/164 [1:29:10<28:30, 43.87s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  77%|███████▋  | 126/164 [1:29:54<27:44, 43.79s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  77%|███████▋  | 127/164 [1:30:38<27:00, 43.80s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  78%|███████▊  | 128/164 [1:31:21<26:16, 43.80s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  79%|███████▊  | 129/164 [1:32:05<25:33, 43.82s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  79%|███████▉  | 130/164 [1:32:39<23:03, 40.70s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  80%|███████▉  | 131/164 [1:33:23<22:55, 41.67s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  80%|████████  | 132/164 [1:34:06<22:33, 42.30s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  81%|████████  | 133/164 [1:34:50<22:07, 42.83s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  82%|████████▏ | 134/164 [1:35:34<21:34, 43.14s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  82%|████████▏ | 135/164 [1:36:18<20:54, 43.26s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  83%|████████▎ | 136/164 [1:37:02<20:15, 43.41s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  84%|████████▎ | 137/164 [1:37:45<19:34, 43.50s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  84%|████████▍ | 138/164 [1:38:30<18:58, 43.77s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  85%|████████▍ | 139/164 [1:39:13<18:12, 43.71s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  85%|████████▌ | 140/164 [1:39:57<17:30, 43.77s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  86%|████████▌ | 141/164 [1:40:41<16:46, 43.75s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  87%|████████▋ | 142/164 [1:41:25<16:04, 43.84s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  87%|████████▋ | 143/164 [1:42:09<15:20, 43.83s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  88%|████████▊ | 144/164 [1:42:53<14:36, 43.82s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  88%|████████▊ | 145/164 [1:43:37<13:55, 43.97s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  89%|████████▉ | 146/164 [1:44:22<13:16, 44.24s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  90%|████████▉ | 147/164 [1:45:06<12:32, 44.25s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  90%|█████████ | 148/164 [1:45:50<11:47, 44.21s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  91%|█████████ | 149/164 [1:46:32<10:54, 43.61s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  91%|█████████▏| 150/164 [1:47:17<10:14, 43.87s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  92%|█████████▏| 151/164 [1:48:01<09:31, 43.94s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  93%|█████████▎| 152/164 [1:48:45<08:46, 43.87s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  93%|█████████▎| 153/164 [1:49:29<08:03, 44.00s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  94%|█████████▍| 154/164 [1:50:13<07:20, 44.07s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  95%|█████████▍| 155/164 [1:50:57<06:36, 44.10s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  95%|█████████▌| 156/164 [1:51:42<05:53, 44.16s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  96%|█████████▌| 157/164 [1:52:25<05:08, 44.01s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  96%|█████████▋| 158/164 [1:53:09<04:24, 44.01s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  97%|█████████▋| 159/164 [1:53:53<03:39, 43.90s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  98%|█████████▊| 160/164 [1:54:37<02:55, 43.84s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  98%|█████████▊| 161/164 [1:55:21<02:12, 44.06s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  99%|█████████▉| 162/164 [1:56:05<01:28, 44.07s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:  99%|█████████▉| 163/164 [1:56:50<00:44, 44.19s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java: 100%|██████████| 164/164 [1:57:08<00:00, 36.32s/it]HumanEval-X Java: 100%|██████████| 164/164 [1:57:08<00:00, 42.86s/it]
+
+============================================================
+HumanEval-X Java Results
+============================================================
+  Problems:    164
+  pass@1:      0.0000 (실행 기반)
+  BLEU:        0.3055
+  CodeBLEU:    0.3717
+  chrF:        0.5426
+  Edit Dist:   0.5155
+
+Metrics saved to eval_results/qwen2.5-coder-1.5b/codegen_humanevalx/ast_ctx20/metrics_humanevalx_finetuned.json
+Predictions saved to eval_results/qwen2.5-coder-1.5b/codegen_humanevalx/ast_ctx20/predictions_humanevalx_finetuned.jsonl

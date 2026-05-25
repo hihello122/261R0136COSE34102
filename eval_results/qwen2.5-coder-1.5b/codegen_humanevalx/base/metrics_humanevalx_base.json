@@ -1,0 +1,11 @@
+{
+  "model": "/opt/dlami/nvme/models/qwen2.5-coder-1.5b",
+  "benchmark": "humanevalx-java",
+  "total_problems": 164,
+  "pass@1": 0.0,
+  "execution_available": true,
+  "avg_bleu": 0.29719068265985266,
+  "avg_codebleu": 0.3617205987250278,
+  "avg_chrf": 0.5371949643789007,
+  "avg_edit_distance": 0.5251308081978211
+}

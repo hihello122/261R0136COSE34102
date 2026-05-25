@@ -329,7 +329,7 @@ def plot_radar(data, modes, output_dir, ctx, title_suffix=""):
 
 # ── 그래프 5: Codegen 벤치마크 bar chart ─────────────────────
 
-def plot_codegen_bars(codegen: dict, output_dir: Path):
+def plot_codegen_bars(codegen: dict, output_dir: Path, title_suffix: str = ""):
     """HumanEval-X / MultiPL-E Java 벤치마크별 bar chart."""
     available = [bm for bm in CODEGEN_BENCHMARKS if bm in codegen]
     if not available:
@@ -342,7 +342,7 @@ def plot_codegen_bars(codegen: dict, output_dir: Path):
         n_m = len(metrics)
 
         fig, axes = plt.subplots(1, n_m, figsize=(3.8 * n_m, 4.5))
-        fig.suptitle(CODEGEN_BM_LABELS[bm], fontsize=13, fontweight="bold", y=1.02)
+        fig.suptitle(f"{CODEGEN_BM_LABELS[bm]}{title_suffix}", fontsize=13, fontweight="bold", y=1.02)
         if n_m == 1:
             axes = [axes]
 
@@ -386,7 +386,7 @@ def plot_codegen_bars(codegen: dict, output_dir: Path):
 
 # ── 그래프 6: Codegen pass@1 delta heatmap ───────────────────
 
-def plot_codegen_delta_heatmap(codegen: dict, output_dir: Path):
+def plot_codegen_delta_heatmap(codegen: dict, output_dir: Path, title_suffix: str = ""):
     """fine-tuned vs zero-shot pass@1 delta를 벤치마크 × 모드 heatmap으로 표시."""
     available = [bm for bm in CODEGEN_BENCHMARKS if bm in codegen]
     if not available:
@@ -421,7 +421,7 @@ def plot_codegen_delta_heatmap(codegen: dict, output_dir: Path):
     ax.set_xticklabels([CODEGEN_BM_LABELS[bm] for bm in available], fontsize=10)
     ax.set_yticks(range(len(ft_tags)))
     ax.set_yticklabels(ft_tags, fontsize=9)
-    ax.set_title("Code Gen pass@1 Δ (fine-tuned − zero-shot)\n(green = fine-tuning helps)", fontsize=11, pad=10)
+    ax.set_title(f"Code Gen pass@1 Δ (fine-tuned − zero-shot){title_suffix}\n(green = fine-tuning helps)", fontsize=11, pad=10)
 
     for ti in range(len(ft_tags)):
         for bi in range(len(available)):
@@ -441,7 +441,7 @@ def plot_codegen_delta_heatmap(codegen: dict, output_dir: Path):
 
 # ── 그래프 7: ConGra vs Codegen scatter (forgetting 분석) ─────
 
-def plot_codegen_vs_congra(data: dict, codegen: dict, modes: list, output_dir: Path, ctx: int):
+def plot_codegen_vs_congra(data: dict, codegen: dict, modes: list, output_dir: Path, ctx: int, title_suffix: str = ""):
     """ConGra CodeBLEU vs 코드젠 pass@1 scatter – catastrophic forgetting 분석."""
     available = [bm for bm in CODEGEN_BENCHMARKS if bm in codegen]
     if not available or not modes:
@@ -477,7 +477,7 @@ def plot_codegen_vs_congra(data: dict, codegen: dict, modes: list, output_dir: P
 
         ax.set_xlabel("ConGra CodeBLEU (fine-tuned)", fontsize=9)
         ax.set_ylabel(f"{CODEGEN_BM_LABELS[bm]}  pass@1", fontsize=9)
-        ax.set_title(f"ConGra vs {CODEGEN_BM_LABELS[bm]}\n(ctx={ctx})", fontsize=10)
+        ax.set_title(f"ConGra vs {CODEGEN_BM_LABELS[bm]}{title_suffix}\n(ctx={ctx})", fontsize=10)
         ax.legend(fontsize=8, frameon=False)
         ax.yaxis.grid(True, linestyle="--", alpha=0.4)
         ax.xaxis.grid(True, linestyle="--", alpha=0.4)
@@ -609,8 +609,8 @@ def main():
         else:
             print(f"  Benchmarks: {list(codegen.keys())}")
             print(f"  Generating codegen plots...")
-            plot_codegen_bars(codegen, output_dir)
-            plot_codegen_delta_heatmap(codegen, output_dir)
+            plot_codegen_bars(codegen, output_dir, title_suffix)
+            plot_codegen_delta_heatmap(codegen, output_dir, title_suffix)
 
             # ConGra vs codegen scatter: ctx별로 생성
             if ctxs:
@@ -618,7 +618,7 @@ def main():
                     data = load_results(results_dir, ctx)
                     if data:
                         modes = ordered_modes(data)
-                        plot_codegen_vs_congra(data, codegen, modes, output_dir, ctx)
+                        plot_codegen_vs_congra(data, codegen, modes, output_dir, ctx, title_suffix)
 
             print_codegen_summary(codegen)
 

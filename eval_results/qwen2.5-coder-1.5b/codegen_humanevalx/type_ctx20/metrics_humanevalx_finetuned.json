@@ -1,0 +1,11 @@
+{
+  "model": "./ckpts/type_ctx20_qwen2.5-coder-1.5b/final",
+  "benchmark": "humanevalx-java",
+  "total_problems": 164,
+  "pass@1": 0.0,
+  "execution_available": true,
+  "avg_bleu": 0.3196075918930811,
+  "avg_codebleu": 0.38761240763540045,
+  "avg_chrf": 0.5496206373850623,
+  "avg_edit_distance": 0.5161253572841996
+}

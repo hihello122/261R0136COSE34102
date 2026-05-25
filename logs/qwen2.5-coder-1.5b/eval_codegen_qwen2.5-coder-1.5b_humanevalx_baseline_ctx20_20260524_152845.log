@@ -1,0 +1,18 @@
+========================================
+ Fine-tuned | humanevalx | mode: baseline | ctx: 20
+ Model:  ./ckpts/baseline_ctx20_qwen2.5-coder-1.5b/final
+ Base:   /opt/dlami/nvme/models/qwen2.5-coder-1.5b
+ Output: ./eval_results/qwen2.5-coder-1.5b/codegen_humanevalx/baseline_ctx20
+========================================
+Loading base model: /opt/dlami/nvme/models/qwen2.5-coder-1.5b
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+Loading weights:   4%|▍         | 15/338 [00:00<00:02, 146.35it/s]Loading weights:  33%|███▎      | 113/338 [00:00<00:00, 626.93it/s]Loading weights:  65%|██████▍   | 219/338 [00:00<00:00, 812.74it/s]Loading weights:  94%|█████████▍| 317/338 [00:00<00:00, 873.03it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 797.62it/s]
+Loading LoRA adapter: ./ckpts/baseline_ctx20_qwen2.5-coder-1.5b/final
+
+Loading HumanEval-X Java (THUDM/humaneval-x)...
+  164 problems
+HumanEval-X Java:   0%|          | 0/164 [00:00<?, ?it/s]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+HumanEval-X Java:   1%|          | 1/164 [00:44<2:00:25, 44.33s/it]/home/ubuntu/miniconda3/envs/final_project/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)

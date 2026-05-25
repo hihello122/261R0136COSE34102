@@ -392,6 +392,82 @@ def truncate_at_stop(text: str, stop_sequences: list) -> str:
     return text
 
 
+_HUMANEVALX_TRAILING_PATTERNS = [
+    re.compile(r"\n\s*/\*\*"),
+    re.compile(r"\n\s*(?:public|private|protected)\s+(?:static\s+)?[\w<>\[\], ?]+\s+\w+\s*\("),
+    re.compile(r"\n\s*(?:public\s+)?class\s+\w+"),
+    re.compile(r"\n\s*(?:import|package)\s+"),
+]
+
+
+def _strip_humanevalx_trailing_prompt(text: str) -> str:
+    """HumanEval-X completion 뒤에 붙은 다음 문제 프롬프트/선언을 제거."""
+    cut = len(text)
+    for pattern in _HUMANEVALX_TRAILING_PATTERNS:
+        match = pattern.search(text)
+        if match:
+            cut = min(cut, match.start())
+    return text[:cut].rstrip()
+
+
+def _brace_delta(code: str) -> int:
+    """문자열/주석을 대략 무시하고 Java brace balance를 계산."""
+    delta = 0
+    i = 0
+    state = "code"
+    while i < len(code):
+        ch = code[i]
+        nxt = code[i + 1] if i + 1 < len(code) else ""
+        if state == "code":
+            if ch == '"':
+                state = "double"
+            elif ch == "'":
+                state = "single"
+            elif ch == "/" and nxt == "/":
+                state = "line_comment"
+                i += 1
+            elif ch == "/" and nxt == "*":
+                state = "block_comment"
+                i += 1
+            elif ch == "{":
+                delta += 1
+            elif ch == "}":
+                delta -= 1
+        elif state == "double":
+            if ch == "\\":
+                i += 1
+            elif ch == '"':
+                state = "code"
+        elif state == "single":
+            if ch == "\\":
+                i += 1
+            elif ch == "'":
+                state = "code"
+        elif state == "line_comment":
+            if ch == "\n":
+                state = "code"
+        elif state == "block_comment":
+            if ch == "*" and nxt == "/":
+                state = "code"
+                i += 1
+        i += 1
+    return delta
+
+
+def postprocess_humanevalx_prediction(prompt: str, raw_pred: str) -> str:
+    """HumanEval-X Java completion을 평가 가능한 method/class completion으로 정리."""
+    # 먼저 정상적인 method+class 닫힘이 생성된 경우를 보존한다.
+    pred = truncate_at_stop(raw_pred, ["\n}\n}", "\n    }\n}"])
+    pred = _strip_humanevalx_trailing_prompt(pred)
+
+    # 모델이 method만 닫고 다음 프롬프트를 이어 쓰는 경우 class 닫힘을 보정한다.
+    missing = _brace_delta(prompt + pred)
+    if 0 < missing <= 2:
+        pred = pred.rstrip() + "\n" + "\n".join("}" for _ in range(missing))
+
+    return pred
+
+
 def load_humanevalx_java(max_samples=None):
     """HumanEval-X Java test split 로드 (THUDM/humaneval-x).
 
@@ -490,7 +566,7 @@ def run_humanevalx_eval(model, tokenizer, args) -> tuple:
         test_code = sample["test"]         # class Main { public static void main... }
 
         raw_pred = generate_resolution(model, tokenizer, prompt, args)
-        pred = truncate_at_stop(raw_pred, stop_seqs)
+        pred = postprocess_humanevalx_prediction(prompt, raw_pred)
 
         passed = False
         if java_ok:
