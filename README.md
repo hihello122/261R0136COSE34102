@@ -1,5 +1,7 @@
 # 2026 Natural Language Processing (COSE461) Final Project
 
+**Team 22**
+
 고려대학교 정보대학 컴퓨터학과 2021320147 박주영
 
 고려대학교 보건과학대학 바이오의공학부 2021250031 정예준
