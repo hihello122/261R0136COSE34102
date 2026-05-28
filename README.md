@@ -2,17 +2,19 @@
 
 **Team 22**
 
-고려대학교 정보대학 컴퓨터학과 2021320147 박주영
+- 고려대학교 정보대학 컴퓨터학과 2021320147 박주영
 
-고려대학교 보건과학대학 바이오의공학부 2021250031 정예준
+- 고려대학교 보건과학대학 바이오의공학부 2021250031 정예준
+
+**This README provides a brief overview of our project; for more detailed explanations, please refer to our project report.**
+
+**We implemented all code ourselves, and this repository contains all source code and documentation excluding large processed data files and model checkpoints.**
 
 ## STAR-Merge: Structural and Type-Aware Merge Conflict Resolution
 
 STAR-Merge is an NLP-based framework for resolving Java merge conflicts by augmenting token-level neural merge models with structural and type-aware code information.
 
-**This README provides a brief overview of our project; for more detailed explanations, please refer to our project report.**
-
-## 1. Dataset
+## 1. Data
 
 **Congra Benchmark**
 
@@ -48,7 +50,7 @@ This information can help the model generate resolutions that are more consisten
 We fine-tune pretrained code language models using QLoRA.
 QLoRA enables efficient fine-tuning by updating a small number of low-rank adapter parameters while keeping the base model quantized.
 
-## 3. Expreiments
+## 3. Experiments
 
 **Models**
 
